@@ -12,11 +12,19 @@
 	<context:component-scan base-package="app.reservation" />
 	
 	<mvc:resources location="/resources/" mapping="/resources/**" />
+<<<<<<< HEAD
 	<mvc:annotation-driven></mvc:annotation-driven>
 	
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/" />
+=======
+	<mvc:annotation-driven/>
+	
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/view/" />
+>>>>>>> master
 		<property name="suffix" value=".jsp" />
 	</bean>
 	

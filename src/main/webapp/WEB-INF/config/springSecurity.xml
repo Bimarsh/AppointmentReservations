@@ -10,30 +10,40 @@
 	<http auto-config="true">
 		<!-- true defaults <form-login/> -->
 
-		<intercept-url pattern="/cars" access="hasAnyRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/cars/**" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/addCar.html" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/home" access="hasRole('ROLE_ADMIN')" />
+		
 		<csrf disabled="true"/>
-		<form-login login-page="/login.jsp" authentication-failure-url="/login.jsp"
-			always-use-default-target="true" default-target-url="/cars" />
+		<form-login login-page="/login" authentication-failure-url="/login.jsp"
+			always-use-default-target="true" default-target-url="/home" />
 			<logout logout-success-url="/login.jsp" delete-cookies="JSESSIONID" invalidate-session="true" />
 	</http>
 
 	<authentication-manager>
 		<authentication-provider>
 			<user-service>
-				<user name="bimarsh" password="bimarsh" authorities="ROLE_ADMIN" />
+<!-- 				<user name="bimarsh" password="bimarsh" authorities="ROLE_ADMIN" /> -->
 				<user name="admin" password="admin" authorities="ROLE_ADMIN" />
-				<user name="user" password="user" authorities="ROLE_USER" />
+<!-- 				<user name="user" password="user" authorities="ROLE_USER" /> -->
 			</user-service>
-
+		</authentication-provider>
+		<authentication-provider>
+			<jdbc-user-service data-source-ref="dataSource"
+				users-by-username-query="select username, password, enabled from user where username=?"
+				authorities-by-username-query="select u.username, ur.userRoles from user u, user_userRoles ur where u.id=ur.user_id and u.username=?" />
+				
 		</authentication-provider>
 	</authentication-manager>
 	
+<<<<<<< HEAD
 <beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver"/>
 		<beans:property name="url" value="jdbc:mysql://localhost:3306/appointmentReservations"/>
 		<beans:property name="username" value="root"/>
 		<beans:property name="password" value="root"/>
 	</beans:bean>
+=======
+	
+	
+
+>>>>>>> master
 </beans:beans>

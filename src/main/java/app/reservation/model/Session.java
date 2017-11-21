@@ -1,5 +1,7 @@
 package app.reservation.model;
 
+import java.sql.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,6 +12,9 @@ public class Session {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
+	private Date date;
+	private Date startTime;
+	private int capacity;
 
 	public long getId() {
 		return id;

@@ -1,9 +1,11 @@
 package app.reservation.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import app.reservation.model.User;
@@ -35,11 +37,8 @@ public class Person {
 	
 	private String email;
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	private User user;
-
-	
-	
 
 	public User getUser() {
 		return user;
@@ -81,6 +80,10 @@ public class Person {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+	public void addUser(User user)
+	{
+		
 	}
 
 	
