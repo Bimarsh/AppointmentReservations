@@ -13,44 +13,88 @@
  padding: 8px;
  margin: 16px;
 }
+
 </style>
+
+<script type="text/javascript"
+	src="<c:url value="/resources/js/jquery.min.js" />"></script>
+	<script type="text/javascript"
+	src="<c:url value="/resources/js/icheck.min.js" />"></script>
+	<script type="text/javascript"
+	src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
+<link rel="stylesheet"
+	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+<link href="<c:url value="/resources/AdminLTE.min.css" />" rel="stylesheet" type="text/css" />
+<link href="<c:url value="/resources/blue.css" />" rel="stylesheet" type="text/css" />
+<!-- <link href="resources/bootstrap.min.css" rel="stylesheet" -->
+<!-- 	type="text/css" /> -->
+<link href="<c:url value="/resources/ionicons.min.css" />" rel="stylesheet" type="text/css" />
+
+<link href="<c:url value="/resources/font-awesome.min.css" />" rel="stylesheet" type="text/css" />
+<link href="<c:url value="/resources/dataTables.bootstrap.min.css" />" rel="stylesheet" type="text/css" />
+	<link href="<c:url value="/resources/_all-skins.css" />" rel="stylesheet" type="text/css" />
 </head>
-<body onload='document.f.j_username.focus();'>
- <h3>Login with Username and Password (Custom Login Page)</h3>
- 
- <c:if test="${not empty error}">
+
+<body class="hold-transition login-page">
+<div class="login-box">
+  <div class="login-logo">
+    <a href="../../index2.html"><b>TM</b> Checking Registration</a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="login-box-body">
+    <p class="login-box-msg">Sign in to start your session</p>
+	<c:if test="${not empty error}">
   <div class="errorblock">
    Your login attempt was not successful, try again.<br /> Caused :
    ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
   </div>
  </c:if>
- 
- <form name='f' action="<c:url value="login" />"
-  method='POST'>
- 
-  <table>
-   <tr>
-    <td>User:</td>
-    <td><input type='text' name='username' value=''>
-    </td>
-   </tr>
-   <tr>
-    <td>Password:</td>
-    <td><input type='password' name='password' />
-   
-    </td>
-   </tr>
-   <tr>
-    <td colspan='2'><input name="submit" type="submit"
-     value="submit" />
-    </td>
-   </tr>
-   <tr>
-    <td colspan='2'><input name="reset" type="reset" />
-    </td>
-   </tr>
-  </table>
- 
- </form>
-</body>
+    <form name="f" action="<c:url value="login" />" method="post">
+    	
+      <div class="form-group has-feedback">
+        <input type="text" class="form-control" placeholder="Username" name="username">
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="password" class="form-control" placeholder="Password" name="password">
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="row">
+<!--           <div class="checkbox icheck"> -->
+<!--             <label> -->
+<!--               <div class="icheckbox_square-blue" aria-checked="false" aria-disabled="false" style="position: relative;"><input type="checkbox" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> Remember Me -->
+<!--             </label> -->
+<!--           </div> -->
+        <!-- /.col -->
+        <div class="col-xs-6 center-block text-center">
+          <button type="submit" class="btn btn-primary btn-small btn-flat">Sign In</button>
+          <button type="submit" class="btn btn-warning btn-small btn-flat">Reset</button>
+        </div>
+        <!-- /.col -->
+      </div>
+    </form>
+
+    <a href="register.html" class="text-center">Register a new membership</a>
+
+  </div>
+  <!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
+
+<script>
+  $(function () {
+    $('input').iCheck({
+      checkboxClass: 'icheckbox_square-blue',
+      radioClass: 'iradio_square-blue',
+      increaseArea: '20%' // optional
+    });
+  });
+</script>
+
+
+<div id="lbdictex_find_popup" class="lbexpopup hidden" style="position: absolute; top: 0px; left: 0px;"><div class="lbexpopup_top"><h2 class="fl popup_title">&nbsp;</h2><ul><li><a class="close_main popup_close" href="#">&nbsp;</a></li></ul><div class="clr"></div></div><div class="popup_details"></div><div class="popup_powered">abc</div></div><div id="lbdictex_ask_mark" class="hidden" style="position: absolute; top: 0px; left: 0px;"><a class="lbdictex_ask_select" href="#">&nbsp;</a></div></body>
 </html>

@@ -14,7 +14,7 @@
 		
 		<csrf disabled="true"/>
 		<form-login login-page="/login" authentication-failure-url="/login.jsp"
-			always-use-default-target="true" default-target-url="/home" />
+			always-use-default-target="true" default-target-url="/session" />
 			<logout logout-success-url="/login.jsp" delete-cookies="JSESSIONID" invalidate-session="true" />
 	</http>
 
