@@ -77,10 +77,10 @@
 				<!-- sidebar menu: : style can be found in sidebar.less -->
 				<ul class="sidebar-menu tree" data-widget="tree">
 
-					<li><a href="<c:url value = "/appointment"/>"> <i
+					<li><a href="<c:url value = "/appointment"/>" class="<c:if test="${fn:contains(pageContext.request.requestURI, 'appointment')}">active</c:if>"> <i
 							class="fa fa-calendar"></i> <span>Appointments</span>
 					</a></li>
-					<li><a href="<c:url value = "/user"/>"> <i
+					<li><a href="<c:url value = "/user"/>" class="<c:if test="${fn:contains(pageContext.request.requestURI, 'user')}">active</c:if>"> <i
 							class="fa fa-users"></i> <span>Users</span>
 					</a></li>
 					<li><a href="<c:url value = "/session"/>" class="<c:if test="${fn:contains(pageContext.request.requestURI, 'session')}">active</c:if>"
