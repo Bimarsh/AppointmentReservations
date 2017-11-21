@@ -1,9 +1,20 @@
 package app.reservation.service;
 
-import org.springframework.stereotype.Service;
+import java.util.List;
 
-@Service
-public class PersonService {
-	
+import app.reservation.model.Person;
 
+public interface PersonService {
+
+	Person findById(Long id);
+
+	List<Person> findAll();
+
+	Person saveUser(Person person);
+
+	Person updatePerson(Person person);
+
+	void deletePerson(Long id);
+
+	List<Person> findPersonByRoleName(String roleName);
 }
