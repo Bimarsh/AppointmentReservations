@@ -34,6 +34,7 @@ public class User {
 	private boolean enabled;
 	
 	@ElementCollection(fetch = FetchType.EAGER)
+	@Enumerated(EnumType.STRING)
 	private List<UserRoles> userRoles;
 
 	
