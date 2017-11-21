@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -42,6 +43,9 @@ public class Session {
 	@OneToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL) 
 	@JoinColumn(name="session-ID") 
 	private Person counselor;
+	
+	@OneToMany
+	private Appointment appointment;
 
 	public Session() {
 		
@@ -95,6 +99,15 @@ public class Session {
 
 	public void setCounselor(Person counselor) {
 		this.counselor = counselor;
+	}
+	
+
+	public Appointment getAppointment() {
+		return appointment;
+	}
+
+	public void setAppointment(Appointment appointment) {
+		this.appointment = appointment;
 	}
 
 	@Override

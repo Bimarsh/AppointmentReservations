@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import app.reservation.model.Appointment;
+import app.reservation.model.Session;
 import app.reservation.repository.AppointmentRepository;
 
 @Service
@@ -14,8 +15,18 @@ public class AppointmentServiceImp implements AppointmentService {
 	@Autowired
 	AppointmentRepository appoinymentRepository;
 
+	@Autowired
+	SessionService sessionService;
+
 	public void save(Appointment appointment) {
-		appoinymentRepository.save(appointment);
+
+		Session session = sessionService.findOne(appointment.getSession().getId());
+
+		if (session.getSeat() > 24) {
+			///
+		} else
+
+			appoinymentRepository.save(appointment);
 	}
 
 	@Override

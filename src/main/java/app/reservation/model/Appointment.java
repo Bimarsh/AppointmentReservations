@@ -21,6 +21,13 @@ public class Appointment {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="person_id")
 	private Person person;
+	
+	
+	
+
+	public Appointment() {
+		super();
+	}
 
 	public long getId() {
 		return id;
