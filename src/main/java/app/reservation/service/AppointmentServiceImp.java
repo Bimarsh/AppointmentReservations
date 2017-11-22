@@ -30,8 +30,8 @@ public class AppointmentServiceImp implements AppointmentService {
 	}
 
 	@Override
-	public Appointment getAppointment(Long appointmentID) {
-		return appoinymentRepository.findOne(appointmentID);
+	public List<Appointment> getAppointmentByPersonId(Long personId) {
+		return appoinymentRepository.getAppointmentByPersonId(personId);
 	}
 
 	@Override

@@ -7,10 +7,13 @@ import app.reservation.model.Appointment;
 public interface AppointmentService {
 
 	public void save(Appointment appointment);
+
 	public void update(Appointment appointment);
+
 	public List<Appointment> getAllAppointment();
-	public Appointment getAppointment(Long appointmentid);
+
+	public List<Appointment> getAppointmentByPersonId(Long personId);
+
 	public void delete(Long appointmentId);
 
-	
 }

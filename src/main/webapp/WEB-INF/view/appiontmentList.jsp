@@ -6,7 +6,7 @@
 <%@ taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
-<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -16,15 +16,21 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
-<link href="<c:url value="/resources/AdminLTE.min.css" />" rel="stylesheet" type="text/css" />
-<link href="<c:url value="/resources/blue.css" />" rel="stylesheet" type="text/css" />
+<link href="<c:url value="/resources/AdminLTE.min.css" />"
+	rel="stylesheet" type="text/css" />
+<link href="<c:url value="/resources/blue.css" />" rel="stylesheet"
+	type="text/css" />
 <!-- <link href="resources/bootstrap.min.css" rel="stylesheet" -->
 <!-- 	type="text/css" /> -->
-<link href="<c:url value="/resources/ionicons.min.css" />" rel="stylesheet" type="text/css" />
+<link href="<c:url value="/resources/ionicons.min.css" />"
+	rel="stylesheet" type="text/css" />
 
-<link href="<c:url value="/resources/font-awesome.min.css" />" rel="stylesheet" type="text/css" />
-<link href="<c:url value="/resources/dataTables.bootstrap.min.css" />" rel="stylesheet" type="text/css" />
-	<link href="<c:url value="/resources/_all-skins.css" />" rel="stylesheet" type="text/css" />
+<link href="<c:url value="/resources/font-awesome.min.css" />"
+	rel="stylesheet" type="text/css" />
+<link href="<c:url value="/resources/dataTables.bootstrap.min.css" />"
+	rel="stylesheet" type="text/css" />
+<link href="<c:url value="/resources/_all-skins.css" />"
+	rel="stylesheet" type="text/css" />
 <title>Session</title>
 </head>
 
@@ -77,16 +83,17 @@
 				<!-- sidebar menu: : style can be found in sidebar.less -->
 				<ul class="sidebar-menu tree" data-widget="tree">
 
-					<li><a href="<c:url value = "/appointment"/>" class="<c:if test="${fn:contains(pageContext.request.requestURI, 'appointment')}">active</c:if>"> <i
-							class="fa fa-calendar"></i> <span>Appointments</span>
+					<li><a href="<c:url value = "/appointment"/>"
+						class="<c:if test="${fn:contains(pageContext.request.requestURI, 'appointment')}">active</c:if>">
+							<i class="fa fa-calendar"></i> <span>Appointments</span>
 					</a></li>
-					<li><a href="<c:url value = "/user"/>" class="<c:if test="${fn:contains(pageContext.request.requestURI, 'user')}">active</c:if>"> <i
-							class="fa fa-users"></i> <span>Users</span>
+					<li><a href="<c:url value = "/user"/>"
+						class="<c:if test="${fn:contains(pageContext.request.requestURI, 'user')}">active</c:if>">
+							<i class="fa fa-users"></i> <span>Users</span>
 					</a></li>
-					<li><a href="<c:url value = "/session"/>" class="<c:if test="${fn:contains(pageContext.request.requestURI, 'session')}">active</c:if>"
-					
-					> <i
-							class="fa fa-envelope"></i> <span>Sessions</span>
+					<li><a href="<c:url value = "/session"/>"
+						class="<c:if test="${fn:contains(pageContext.request.requestURI, 'session')}">active</c:if>">
+							<i class="fa fa-envelope"></i> <span>Sessions</span>
 					</a></li>
 				</ul>
 			</section>
@@ -112,7 +119,7 @@
 						<div class="box">
 							<div class="box-header">
 								<h3 class="box-title">All Appiontment:</h3>
-								
+
 							</div>
 							<!-- /.box-header -->
 							<div class="box-body">
@@ -129,30 +136,30 @@
 												role="grid" aria-describedby="example2_info">
 												<thead>
 													<tr role="row">
-														<th>Id</th>
+
 														<th>SessionStart Date</th>
 														<th>Session Start Time</th>
 														<th>Session Duration</th>
-														
+
 														<th>Counselor of the session</th>
-														
-														
+
+
 													</tr>
 
 												</thead>
 												<tbody>
 													<c:forEach items="${sessionList}" var="session">
 														<tr>
-															<td><c:out value="${session.id} " /></td>
+
 
 															<td><c:out value="${session.startDate}" /></td>
 
 															<td><c:out value="${session.startTime}" /></td>
 															<td><c:out value="${session.duration}" /></td>
-															
+
 															<td><c:out value="${session.counselor.firstname}" /></td>
 
-															
+
 
 
 

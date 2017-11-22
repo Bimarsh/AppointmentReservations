@@ -27,19 +27,7 @@ public class AppointmentController {
 	@Autowired
 	private AppointmentService appointmentService;
 
-	/*@RequestMapping(value = "/addAppointment", method = RequestMethod.GET)
-	public String getAppointmentsForm(@ModelAttribute("appointments") Appointment appointment, Model model) {
-
-		List<String> coun = new ArrayList<String>();
-		coun.add("Selam");
-		coun.add("Yosief");
-		coun.add("fisha");
-		coun.add("adonai");
-		coun.add("misgana");
-		model.addAttribute("coun", coun);
-
-		return "session";
-	}*/
+	
 
 	@RequestMapping(value = "/addAppointment", method = RequestMethod.POST)
 	public String add(@Valid @ModelAttribute("appointment") Appointment appointment, BindingResult result,
@@ -55,16 +43,16 @@ public class AppointmentController {
 
 	@RequestMapping(value = "/appointmentList/{id}", method = RequestMethod.GET)
 	public String get(@PathVariable long id, Model model) {
-		model.addAttribute("appointment", appointmentService.getAppointment(id));
+		model.addAttribute("appointment", appointmentService.getAppointmentByPersonId(id));
 		return "appointmentList";
 	}
 
-	@RequestMapping(value = "/updateAppointment/{id}", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/updateAppointment/{id}", method = RequestMethod.GET)
 	public String updateAppointment(@PathVariable Long id, @ModelAttribute("appointment") Appointment appointment,
 			Model modle) {
 
 		Appointment updateAppointment = appointmentService.getAppointment(id);
-		/* appointmentService.update(appointment); */
+		 appointmentService.update(appointment); 
 		modle.addAttribute("mode", "EDIT_APPIONTMNET");
 		modle.addAttribute("update", updateAppointment);
 		return "appointment";
@@ -83,6 +71,6 @@ public class AppointmentController {
 		model.addAttribute("appointmentList", appointmentService.getAllAppointment());
 		System.out.println("====" + appointmentService.getAllAppointment());
 		return "appointmentView";
-	}
+	}*/
 
 }
