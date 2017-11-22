@@ -13,7 +13,7 @@ public class CustomerController {
 	@Autowired
 	private CustomerService customerService;
 	
-	@RequestMapping(value = "/persons", method = RequestMethod.POST)
+	@RequestMapping(value = "/customers", method = RequestMethod.POST)
 	public void makeAppointment() {
 		
 	}
