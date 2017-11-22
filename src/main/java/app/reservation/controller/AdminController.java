@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -45,7 +46,6 @@ public class AdminController {
 		
 		return "personList";
 		
-		
 	}
 	@RequestMapping(value="/persons",method=RequestMethod.POST, produces="application/json")
 	public String addPerson(@ModelAttribute("person")Person person)
@@ -65,16 +65,25 @@ public class AdminController {
 		
 		return "redirect:/admin/person";
 		
+	}
+	
+
+	@RequestMapping(value = "/persons/{id}", method = RequestMethod.GET)
+	public String get(@PathVariable long id, Model model) {
 		
+		model.addAttribute("persons", personService.findById(id));
+		return "personDetail";
+	}
+	
+	@RequestMapping(value = "/persons", method = RequestMethod.POST)
+	public String update(@ModelAttribute("person") Person person) {
+		personService.updatePerson(person);
+		return "redirect:/persons";
 	}
 	
 	
-	@RequestMapping(value="/createSession", method=RequestMethod.POST)
-	public void createSession(@ModelAttribute("session")Session session)
-	{
-		
-		
-	}
+	
+	
 	
 	
 
