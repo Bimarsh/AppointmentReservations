@@ -1,4 +1,3 @@
-
 <%@page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -14,9 +13,10 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <link rel="stylesheet"
 	href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 <link href="resources/AdminLTE.min.css" rel="stylesheet" type="text/css" />
 <link href="resources/blue.css" rel="stylesheet" type="text/css" />
 <link href="resources/bootstrap.min.css" rel="stylesheet"
@@ -27,6 +27,7 @@
 <link href="resources/dataTables.bootstrap.min.css" rel="stylesheet"
 	type="text/css" />
 <link href="resources/_all-skins.css" rel="stylesheet" type="text/css" />
+
 <title>Session</title>
 </head>
 <body>
@@ -63,23 +64,30 @@
 					<tr>
 						<td><form:label path="startTime">Start Time
 				:</form:label></td>
-						<td><form:input placeholder="startTime" path="startTime"
-								id="datepickerTime" /></td>
+						<td style="position:relative;"><form:input placeholder="00:00:00" path="startTime"
+								id="datetimepicker1" /> <span id="input"
+							class="glyphicon glyphicon-time"></span></td>
 						<td><form:errors path="startTime" cssStyle="color:red;" /></td>
 					</tr>
 
 					<tr>
-						<td><form:label path="duration">Duration
+						<td><form:label path="duration">Duration 
 				:</form:label></td>
-						<td><form:input placeholder="duration" path="duration" /></td>
+						<td><form:input placeholder="duration in min" path="duration" /></td>
 						<td><form:errors path="duration" cssStyle="color:red;" /></td>
 					</tr>
 
 					<tr>
-						<td><form:label path="seat">Seats
+						<td><form:label path="seat">Number of Seats
 				:</form:label></td>
 						<td><form:input placeholder="seat" path="seat" /></td>
 						<td><form:errors path="seat" cssStyle="color:red;" /></td>
+					</tr>
+					<tr>
+						<td><form:label path="location">Location
+				:</form:label></td>
+						<td><form:input placeholder="location" path="location" /></td>
+						<td><form:errors path="location" cssStyle="color:red;" /></td>
 					</tr>
 
 
@@ -120,34 +128,42 @@
 						<td><form:label path="startDate">Start Date
 				:</form:label></td>
 						<td><form:input placeholder="yyyy-mm-dd" path="startDate"
-								id="datepicker" value="${update.startDate}" /></td>
+								id="datepicker" value="${update.startDate}"  /></td>
 						<td><form:errors path="startDate" cssStyle="color:red;" /></td>
 					</tr>
+
 					<tr>
 						<td><form:label path="startTime">Start Time
 				:</form:label></td>
-						<td><form:input placeholder="startTime" path="startTime"
-								value="${update.startTime}" /></td>
+						<td style="position:relative;"><form:input placeholder="00:00:00" path="startTime"
+								value="${update.startTime}" id="datetimepicker1" /><span id="input"
+							class="glyphicon glyphicon-time"></span></td>
 						<td><form:errors path="startTime" cssStyle="color:red;" /></td>
 					</tr>
 
 					<tr>
 						<td><form:label path="duration">Duration
 				:</form:label></td>
-						<td><form:input placeholder="duration" path="duration"
+						<td><form:input placeholder="duration in min" path="duration"
 								value="${update.duration}" /></td>
 						<td><form:errors path="duration" cssStyle="color:red;" /></td>
 					</tr>
-
+       
 					<tr>
-						<td><form:label path="seat">Seats
+						<td><form:label path="seat">Number of Seats
 				:</form:label></td>
 						<td><form:input placeholder="seat" path="seat"
 								value="${update.seat}" /></td>
 						<td><form:errors path="seat" cssStyle="color:red;" /></td>
 					</tr>
 
-
+                <tr>
+						<td><form:label path="location">Location
+				:</form:label></td>
+						<td><form:input placeholder="location" path="location"
+								value="${update.location}" /></td>
+						<td><form:errors path="location" cssStyle="color:red;" /></td>
+					</tr>
 
 
 					<tr>
@@ -174,10 +190,17 @@
 
 
 	<!--  -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
+	<script
+		src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
 
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 	<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-	<script src="js/bootstrap-datetimepicker.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
 
 	<!-- Javascript -->
 	<script>
@@ -185,7 +208,14 @@
 			$("#datepicker").datepicker({
 				dateFormat : 'yy/mm/dd'
 			});
-
+			$('#datetimepicker1').datetimepicker({
+				//format: 'hh:mm A' //12 hour format
+				format : 'HH:mm:ss' //24 hour format
+			});
+			$('#datetimepicker1').mousedown(function() {
+				if (!$.trim($('#datetimepicker1').val()))
+					$('#datetimepicker1').val('12:00');
+			});
 		});
 	</script>
 
