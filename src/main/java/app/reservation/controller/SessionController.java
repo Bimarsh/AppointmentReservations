@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import app.reservation.model.Person;
 import app.reservation.model.Session;
+import app.reservation.service.PersonService;
 import app.reservation.service.SessionService;
 
 @Controller
@@ -27,6 +28,9 @@ public class SessionController {
 
 	@Autowired
 	private SessionService sessionService;
+
+	@Autowired
+	private PersonService personService;
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String getSessionForm(@ModelAttribute("session") Session session, Model model) {
