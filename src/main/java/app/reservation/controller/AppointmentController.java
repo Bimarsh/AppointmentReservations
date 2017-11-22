@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import app.reservation.model.Appointment;
 import app.reservation.service.AppointmentService;
 
+
 @Controller
 public class AppointmentController {
 	

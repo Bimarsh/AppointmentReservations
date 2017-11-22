@@ -43,7 +43,7 @@
 							class="dropdown-toggle" data-toggle="dropdown"> <span
 								class="hidden-xs">Hi, User</span>
 						</a></li>
-						<li><a href="j_spring_security_logout"
+						<li><a href="logout"
 							data-toggle="control-sidebar"><i class="fa fa-gears"></i>
 								Logout</a></li>
 					</ul>
