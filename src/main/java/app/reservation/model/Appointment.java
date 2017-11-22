@@ -11,6 +11,14 @@ import app.reservation.model.Session;
 
 @Entity
 public class Appointment {
+	
+	
+	public Appointment(Session session, Person person) {
+		super();
+		this.session = session;
+		this.person = person;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;

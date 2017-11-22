@@ -138,14 +138,16 @@
 												<thead>
 													<tr role="row">
 														<th>Id</th>
-														<th>SessionStart Date</th>
-														<th>Session Start Time</th>
-														<th>Session Duration</th>
+														<th>Start Date</th>
+														<th>Start Time</th>
+														<th>Duration</th>
 														<th>Seats Reserved</th>
-														<th>Counselor of the session</th>
+														<th>Counselor </th>
 
 														<th>Edit</th>
 														<th>Delete</th>
+														
+														<th>Book Appointment</th>
 													</tr>
 
 												</thead>
@@ -169,6 +171,12 @@
 																href="<spring:url value="/session/deletSession/${session.id}" />">
 																	<span class="glyphicon glyphicon-trash"></span>
 															</a></td>
+															
+															<td>
+																
+																<a href="<spring:url value="/appointment/addAppointment/${session.id}" />"><button class="btn btn-primary pull-right">Book Appointment
+											</button></a>	
+															</td>
 
 
 
