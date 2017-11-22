@@ -12,13 +12,17 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String indexPage() {
 		
-		return "index";
+		return "login";
 		
 	}
+	
+
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String homePage() {
-		System.out.println("i am in controller");
-		return "home";
+		
+		return "carList";
 		
 	}
+	
+	
 }
