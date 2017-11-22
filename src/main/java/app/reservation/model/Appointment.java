@@ -12,6 +12,10 @@ import app.reservation.model.Session;
 @Entity
 public class Appointment {
 	
+	public Appointment() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	
 	public Appointment(Session session, Person person) {
 		super();
@@ -23,7 +27,7 @@ public class Appointment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne()
 	@JoinColumn(name="session_id")
 	private Session session;
 
