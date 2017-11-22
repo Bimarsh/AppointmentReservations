@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
+	"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+	
+	<definition name="baseLayout" template="/WEB-INF/tiles/template/baseLayout.jsp">
+		<put-attribute name="title" value="TM Checking Appointment" />
+		<put-attribute name="heading" value="" />
+		<put-attribute name="tagline" value="" />
+		<put-attribute name="header" value="/WEB-INF/tiles/template/header.jsp" />
+		<put-attribute name="content" value="" />
+		<put-attribute name="footer" value="/WEB-INF/tiles/template/footer.jsp" />
+	</definition>
+
+	<definition name="sessionList" extends="baseLayout">
+		<put-attribute name="content" value="/WEB-INF/views/sessionList.jsp" />
+	</definition>	
+	
+	<definition name="session" extends="baseLayout">
+		<put-attribute name="content" value="/WEB-INF/views/session.jsp" />
+	</definition>
+	
+	<definition name="personList" extends="baseLayout">
+		<put-attribute name="content" value="/WEB-INF/views/personList.jsp" />
+	</definition>
+	
+	<definition name="person" extends="baseLayout">
+		<put-attribute name="content" value="/WEB-INF/views/person.jsp" />
+	</definition>
+	
+	<definition name="appointmentList" extends="baseLayout">
+		<put-attribute name="content" value="/WEB-INF/views/personList.jsp" />
+	</definition>
+	
+	<definition name="addAppointment" extends="baseLayout">
+		<put-attribute name="content" value="/WEB-INF/views/addPeron.jsp" />
+	</definition>
+
+<!-- 	<definition name="user-register" extends="baseLayout"> -->
+<!-- 		<put-attribute name="content" value="/WEB-INF/views/user-register.jsp" /> -->
+<!-- 	</definition> -->
+</tiles-definitions>

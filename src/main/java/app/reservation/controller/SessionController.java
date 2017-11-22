@@ -80,7 +80,7 @@ public class SessionController {
 
 		model.addAttribute("sessionList", sessionService.findAll());
 		System.out.println("====" + sessionService.findAll());
-		return "sessionView";
+		return "sessionList";
 	}
 
 }
