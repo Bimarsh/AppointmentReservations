@@ -7,17 +7,15 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Add a Car</title>
-        <link href="resources/style.css" rel="stylesheet" type="text/css" />
-        <link href="resources/AdminLTE.min.css" rel="stylesheet" type="text/css" />
-<link href="resources/blue.css" rel="stylesheet" type="text/css" />
-<link href="resources/bootstrap.min.css" rel="stylesheet"
-	type="text/css" />
-<link href="resources/ionicons.min.css" rel="stylesheet" type="text/css" />
-<link href="resources/font-awesome.min.css" rel="stylesheet"
-	type="text/css" />
-<link href="resources/dataTables.bootstrap.min.css" rel="stylesheet"
-	type="text/css" />
-<link href="resources/_all-skins.css" rel="stylesheet" type="text/css" />
+<link href="<c:url value="/resources/AdminLTE.min.css" />" rel="stylesheet" type="text/css" />
+<link href="<c:url value="/resources/blue.css" />" rel="stylesheet" type="text/css" />
+<!-- <link href="resources/bootstrap.min.css" rel="stylesheet" -->
+<!-- 	type="text/css" /> -->
+<link href="<c:url value="/resources/ionicons.min.css" />" rel="stylesheet" type="text/css" />
+
+<link href="<c:url value="/resources/font-awesome.min.css" />" rel="stylesheet" type="text/css" />
+<link href="<c:url value="/resources/dataTables.bootstrap.min.css" />" rel="stylesheet" type="text/css" />
+	<link href="<c:url value="/resources/_all-skins.css" />" rel="stylesheet" type="text/css" />
     </head>
 
 <body class="skin-blue sidebar-mini"

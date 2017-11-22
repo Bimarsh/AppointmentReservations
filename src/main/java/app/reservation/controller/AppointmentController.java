@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 import app.reservation.model.Appointment;
-import app.reservation.model.Session;
+
 import app.reservation.service.AppointmentService;
 
 @Controller
@@ -26,38 +26,39 @@ public class AppointmentController {
 	@Autowired
 	private AppointmentService appointmentService;
 
-	@RequestMapping(value = "/addappointment", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/addAppointment", method = RequestMethod.GET)
 	public String getAppointmentsForm(@ModelAttribute("appointments") Appointment appointment, Model model) {
 
 		List<String> coun = new ArrayList<String>();
-		coun.add("Lwam");
-		coun.add("Yoni");
-		coun.add("Bereket");
-		coun.add("tekle");
+		coun.add("Selam");
+		coun.add("Yosief");
+		coun.add("fisha");
+		coun.add("adonai");
+		coun.add("misgana");
 		model.addAttribute("coun", coun);
 
-		return "appointment";
-	}
+		return "session";
+	}*/
 
-	@RequestMapping(value = "/addappointments", method = RequestMethod.POST)
+	@RequestMapping(value = "/addAppointment", method = RequestMethod.POST)
 	public String add(@Valid @ModelAttribute("appointment") Appointment appointment, BindingResult result,
 			Model model) {
 		if (result.hasErrors()) {
 
-			return "appointment";
+			return "session";
 
 		}
 		appointmentService.save(appointment);
-		return "redirect:/appointment/appointments";
+		return "redirect:/appointment/appointmentList/"+appointment.getPerson().getId();
 	}
 
-	@RequestMapping(value = "/appointments/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/appointmentList/{id}", method = RequestMethod.GET)
 	public String get(@PathVariable long id, Model model) {
 		model.addAttribute("appointment", appointmentService.getAppointment(id));
-		return "appointmentDetail";
+		return "appointmentList";
 	}
 
-	@RequestMapping(value = "/appointments/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/updateAppointment/{id}", method = RequestMethod.GET)
 	public String updateAppointment(@PathVariable Long id, @ModelAttribute("appointment") Appointment appointment,
 			Model modle) {
 
@@ -68,7 +69,7 @@ public class AppointmentController {
 		return "appointment";
 	}
 
-	@RequestMapping(value = "/deleteAppointments/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/deletAppointment/{id}", method = RequestMethod.GET)
 	public String deleteAppointment(long appointmentId) {
 		appointmentService.delete(appointmentId);
 		return "redirect:/appointment/appointmentList";

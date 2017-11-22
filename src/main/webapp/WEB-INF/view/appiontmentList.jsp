@@ -111,14 +111,8 @@
 					<div class="col-xs-12">
 						<div class="box">
 							<div class="box-header">
-								<h3 class="box-title">All Sessions:</h3>
-
-								<sec:authorize url="/addSession">
-
-									<a href="<spring:url value="/session/addsession" />"><button class="btn btn-primary pull-right">Add
-											A Session</button></a>
-								</sec:authorize>
-								<!--               <button class="btn btn-primary pull-right btn-sm"  type="button">Cancel</button> -->
+								<h3 class="box-title">All Appiontment:</h3>
+								
 							</div>
 							<!-- /.box-header -->
 							<div class="box-body">
@@ -139,12 +133,10 @@
 														<th>SessionStart Date</th>
 														<th>Session Start Time</th>
 														<th>Session Duration</th>
-														<th>Seats Reserved</th>
+														
 														<th>Counselor of the session</th>
-
-														<th>Edit</th>
-														<th>Delete</th>
-														<th>Add Appointment</th>
+														
+														
 													</tr>
 
 												</thead>
@@ -157,22 +149,10 @@
 
 															<td><c:out value="${session.startTime}" /></td>
 															<td><c:out value="${session.duration}" /></td>
-															<td><c:out value="${session.seat}" /></td>
+															
 															<td><c:out value="${session.counselor.firstname}" /></td>
 
-															<td><a
-																href="<spring:url value="/session/updateSession/${session.id}" />">
-																	<span class="glyphicon glyphicon-pencil"></span>
-															</a></td>
-															<td><a
-																href="<spring:url value="/session/deletSession/${session.id}" />">
-																	<span class="glyphicon glyphicon-trash"></span>
-															</a></td>
 															
-															<td><a
-																href="<spring:url value="/appiontment/addAppointment/${appiontment.id}" />">
-																	<span class="glyphicon glyphicon-trash"></span>
-															</a></td>
 
 
 

@@ -1,6 +1,7 @@
 package app.reservation.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -44,8 +45,8 @@ public class Session {
 	@JoinColumn(name="session-ID") 
 	private Person counselor;
 	
-	@OneToMany
-	private Appointment appointment;
+	@OneToMany(mappedBy="session")
+	private List<Appointment> appointment;
 
 	public Session() {
 		
@@ -91,8 +92,6 @@ public class Session {
 		this.seat = seat;
 	}
 
-	
-
 	public Person getCounselor() {
 		return counselor;
 	}
@@ -102,12 +101,16 @@ public class Session {
 	}
 	
 
-	public Appointment getAppointment() {
+	public List<Appointment> getAppointment() {
 		return appointment;
 	}
 
-	public void setAppointment(Appointment appointment) {
+	public void setAppointment(List<Appointment> appointment) {
 		this.appointment = appointment;
+	}
+
+	public void setDuration(int duration) {
+		this.duration = duration;
 	}
 
 	@Override
