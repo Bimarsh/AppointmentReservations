@@ -37,6 +37,7 @@ public class Person {
 	
 	private String email;
 	
+	@JoinColumn(name = "u_id", referencedColumnName = "id")
 	@OneToOne(cascade=CascadeType.ALL)
 	private User user;
 

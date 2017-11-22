@@ -31,11 +31,13 @@ public class Session {
 	private Date startDate;
 	
 	@Temporal(TemporalType.TIME )
-
+	@DateTimeFormat(pattern = "HH:mm:ss")
 	private Date startTime;
 	
 	private int duration;
 	private Integer seat;
+	
+	private String location;
 	
 	
 	@Transient
@@ -97,11 +99,26 @@ public class Session {
 		this.counselor = counselor;
 	}
 
+	
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
+
 	@Override
 	public String toString() {
 		return "Session [id=" + id + ", startDate=" + startDate + ", startTime=" + startTime + ", duration=" + duration
-				+ ", seat=" + seat + ", counselor=" + counselor + "]";
+				+ ", seat=" + seat + ", location=" + location + ", counselor=" + counselor + "]";
 	}
+
+	
 
 	
 
