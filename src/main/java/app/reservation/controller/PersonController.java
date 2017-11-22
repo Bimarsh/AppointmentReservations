@@ -49,7 +49,7 @@ public class PersonController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String add(@Valid @ModelAttribute("person") Person person, BindingResult br, Model model) {
 		
-		Person p = new Person(); 
+		Person p = null; 
 		p = personService.findByUserName(person.getUser().getUsername());
 		if(p.getUser().getUsername() != null) {
 			return "person";
