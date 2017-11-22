@@ -46,7 +46,6 @@
 								<th>Session Duration</th>
 								<th>Seats Reserved</th>
 								<th>Counselor of the session</th>
-								<th>asdfasd</th>
 								<th>Edit</th>
 								<th>Delete</th>
 							</tr>
@@ -59,11 +58,13 @@
 
 									<td><c:out value="${appointment.session.id}" /></td>
 									<td><c:out value="${appointment.person.id}" /></td>
+									<td><c:out value="${appointment.session.}" /></td>
+									
 
-									<td><c:out value="${appointment.session.startTime}" /></td>
-									<td><c:out value="${appointment.session.duration}" /></td>
-									<td><c:out value="${appointment.session.seat}" /></td>
-									<td><c:out value="${appointment.session.counselor.firstname}" /></td> 
+<%-- 									<td><c:out value="${session.startTime}" /></td>
+									<td><c:out value="${session.duration}" /></td>
+									<td><c:out value="${session.seat}" /></td>
+									<td><c:out value="${session.counselor.firstname}" /></td> --%>
 
 									<td><a
 										href="<spring:url value="/session/updateSession/${session.id}" />">

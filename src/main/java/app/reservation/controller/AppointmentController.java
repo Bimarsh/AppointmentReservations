@@ -2,6 +2,8 @@ package app.reservation.controller;
 
 
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import app.reservation.model.Appointment;
 import app.reservation.model.Person;
 import app.reservation.model.Session;
+import app.reservation.model.User;
 import app.reservation.service.AppointmentService;
 import app.reservation.service.PersonService;
 import app.reservation.service.SessionService;
@@ -30,24 +33,33 @@ public class AppointmentController {
 	@Autowired
 	private AppointmentService appointmentService;
 
-	@RequestMapping(value = "/addAppointment/{id}", method = RequestMethod.POST)
-	public String add(@PathVariable long id,BindingResult result, Model model ) {
+	@RequestMapping(value = "/addAppointment/{id}", method = RequestMethod.GET)
+	public String add(@PathVariable long id,HttpSession session ) {
 		
-		Person person = personService.findById((long) 1);
+		User user= (User)session.getAttribute("user");
+		Person person= user.getPerson();
+		Session sessionof = sessionService.findOne(id);
+		Appointment appointment= new Appointment();
+		appointment.setPerson(person);
+		//sessionof.addAppointment(appointment);
+		appointment.setSession(sessionof);
+		appointmentService.save(appointment);
 		
-		Session session = sessionService.findOne(id);
+		System.out.println("........................................................");
 		
 		
-		if (result.hasErrors()) {
-
-			return "session";
-
-		}
-		appointmentService.save(new Appointment(session, person));
 		return "redirect:/appointment/appointmentList/" ;//+ appointment.getPerson().getId();
 	}
 	
-	
+
+	@RequestMapping(value = "/appointmentList", method = RequestMethod.GET)
+	public String getAllAppointments( Model model) {
+		model.addAttribute("appointments", appointmentService.getAllAppointment());
+		return "appointmentList";
+		
+		
+		
+	}
 	
 
 	@RequestMapping(value = "/appointmentList/{id}", method = RequestMethod.GET)
