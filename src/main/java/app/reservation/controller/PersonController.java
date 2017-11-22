@@ -16,10 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import app.reservation.model.Person;
+import app.reservation.model.Session;
 import app.reservation.model.UserRoles;
 import app.reservation.service.PersonService;
 
 @Controller
+@RequestMapping("/persons")
+
 public class PersonController {
 
 	@Autowired
@@ -68,10 +71,27 @@ public class PersonController {
 		return "redirect:/persons";
 	}
 	
-	@RequestMapping(value = "/persons/update", method = RequestMethod.POST)
-	public String update(int id) {
+	@RequestMapping(value = "/persons/update/{id}", method = RequestMethod.GET)
+	public String updatePersonForm(@PathVariable Long id, @ModelAttribute("person") Person person, Model model) {
+		
+		model.addAttribute("mode", "EDIT_PERSON");
+		model.addAttribute("personToUpdate", personService.findById(id));
+		return "redirect:/persons";
+	}
+	@RequestMapping(value = "/persons/update/{id}", method = RequestMethod.POST)
+	public String updatePerson(int id) {
 		personService.deletePerson((long) id);
 		return "redirect:/persons";
 	}
+	
+	/*
+	 * 	@RequestMapping(value = "/updateSession/{id}", method = RequestMethod.GET)
+	public String updateSession(@PathVariable Long id, @ModelAttribute("session") Session session, Model modle) {
+		Session updateSession = sessionService.findOne(id);
+		modle.addAttribute("mode", "EDIT_SESSION");
+		modle.addAttribute("update", updateSession);
+		return "session";
+	}
+	 */
 
 }

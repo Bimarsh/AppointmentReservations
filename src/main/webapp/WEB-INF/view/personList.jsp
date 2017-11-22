@@ -9,7 +9,6 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <html>
 <head>
-<<<<<<< HEAD
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>List of Users</title>
 <link href="resources/AdminLTE.min.css" rel="stylesheet" type="text/css" />
@@ -22,7 +21,7 @@
 <link href="resources/dataTables.bootstrap.min.css" rel="stylesheet"
 	type="text/css" />
 <link href="resources/_all-skins.css" rel="stylesheet" type="text/css" />
-=======
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet"
 	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
@@ -45,7 +44,7 @@
 	rel="stylesheet" type="text/css" />
 <link href="<c:url value="/resources/_all-skins.css" />"
 	rel="stylesheet" type="text/css" />
-<title>Session</title> >>>>>>> master
+<title>Person</title>
 </head>
 
 <body class="skin-blue sidebar-mini"
@@ -96,21 +95,18 @@
 				<!-- /.search form -->
 				<!-- sidebar menu: : style can be found in sidebar.less -->
 				<ul class="sidebar-menu tree" data-widget="tree">
-					<<<<<<< HEAD
-					<li><a href="<c:url value = "/test"/>"> <i
-							=======
 
-					<li><a href="<c:url value = "/appointment"/>" class="<c:if test="${fn:contains(pageContext.request.requestURI, 'appointment')}">active</c:if>"> <i
->>>>>>> master
-							class="fa fa-calendar"></i> <span>Appointments</span>
+					<li><a href="<c:url value = "/appointment"/>"
+						class="<c:if test="${fn:contains(pageContext.request.requestURI, 'appointment')}">active</c:if>">
+							<i class="fa fa-calendar"></i> <span>Appointments</span>
 					</a></li>
-							<li><a href="<c:url value = "/user"/>" class="<c:if test="${fn:contains(pageContext.request.requestURI, 'user')}">active</c:if>"> <i
-							class="fa fa-users"></i> <span>Users</span>
+					<li><a href="<c:url value = "/user"/>"
+						class="<c:if test="${fn:contains(pageContext.request.requestURI, 'user')}">active</c:if>">
+							<i class="fa fa-users"></i> <span>Users</span>
 					</a></li>
-							<li><a href="<c:url value = "/session"/>" class="<c:if test="${fn:contains(pageContext.request.requestURI, 'session')}">active</c:if>"
-					
-					> <i
-							class="fa fa-envelope"></i> <span>Sessions</span>
+					<li><a href="<c:url value = "/session"/>"
+						class="<c:if test="${fn:contains(pageContext.request.requestURI, 'session')}">active</c:if>">
+							<i class="fa fa-envelope"></i> <span>Sessions</span>
 					</a></li>
 				</ul>
 			</section>
