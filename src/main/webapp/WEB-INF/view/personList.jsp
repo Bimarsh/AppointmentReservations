@@ -1,14 +1,17 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<%@page import="java.util.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<!DOCTYPE html>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <html>
 <head>
+<<<<<<< HEAD
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Cars currently in the shop</title>
+<title>List of Users</title>
 <link href="resources/AdminLTE.min.css" rel="stylesheet" type="text/css" />
 <link href="resources/blue.css" rel="stylesheet" type="text/css" />
 <link href="resources/bootstrap.min.css" rel="stylesheet"
@@ -19,7 +22,32 @@
 <link href="resources/dataTables.bootstrap.min.css" rel="stylesheet"
 	type="text/css" />
 <link href="resources/_all-skins.css" rel="stylesheet" type="text/css" />
+=======
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet"
+	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+<link href="<c:url value="/resources/AdminLTE.min.css" />"
+	rel="stylesheet" type="text/css" />
+<link href="<c:url value="/resources/blue.css" />" rel="stylesheet"
+	type="text/css" />
+<!-- <link href="resources/bootstrap.min.css" rel="stylesheet" -->
+<!-- 	type="text/css" /> -->
+<link href="<c:url value="/resources/ionicons.min.css" />"
+	rel="stylesheet" type="text/css" />
+
+<link href="<c:url value="/resources/font-awesome.min.css" />"
+	rel="stylesheet" type="text/css" />
+<link href="<c:url value="/resources/dataTables.bootstrap.min.css" />"
+	rel="stylesheet" type="text/css" />
+<link href="<c:url value="/resources/_all-skins.css" />"
+	rel="stylesheet" type="text/css" />
+<title>Session</title> >>>>>>> master
 </head>
+
 <body class="skin-blue sidebar-mini"
 	style="height: auto; min-height: 100%;">
 	<div class="wrapper" style="height: auto; min-height: 100%;">
@@ -43,8 +71,9 @@
 							class="dropdown-toggle" data-toggle="dropdown"> <span
 								class="hidden-xs">Hi, User</span>
 						</a></li>
-						<li><a href="logout" data-toggle="control-sidebar"><i
-								class="fa fa-gears"></i> Logout</a></li>
+						<li><a href="<c:url value="/logout" />"
+							data-toggle="control-sidebar"><i class="fa fa-gears"></i>
+								Logout</a></li>
 					</ul>
 				</div>
 			</nav>
@@ -67,17 +96,20 @@
 				<!-- /.search form -->
 				<!-- sidebar menu: : style can be found in sidebar.less -->
 				<ul class="sidebar-menu tree" data-widget="tree">
-
-					<li><a href="<c:url value = "/cars"/>"> <i
-							class="fa fa-calendar"></i> <span>Car</span>
-					</a></li>
+					<<<<<<< HEAD
 					<li><a href="<c:url value = "/test"/>"> <i
+							=======
+
+					<li><a href="<c:url value = "/appointment"/>" class="<c:if test="${fn:contains(pageContext.request.requestURI, 'appointment')}">active</c:if>"> <i
+>>>>>>> master
 							class="fa fa-calendar"></i> <span>Appointments</span>
 					</a></li>
-					<li><a href="<c:url value = "/test"/>"> <i
+							<li><a href="<c:url value = "/user"/>" class="<c:if test="${fn:contains(pageContext.request.requestURI, 'user')}">active</c:if>"> <i
 							class="fa fa-users"></i> <span>Users</span>
 					</a></li>
-					<li><a href="<c:url value = "/test"/>"> <i
+							<li><a href="<c:url value = "/session"/>" class="<c:if test="${fn:contains(pageContext.request.requestURI, 'session')}">active</c:if>"
+					
+					> <i
 							class="fa fa-envelope"></i> <span>Sessions</span>
 					</a></li>
 				</ul>
@@ -87,14 +119,8 @@
 		<div class="content-wrapper">
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
-				<h1>
-					Data Tables <small>advanced tables</small>
-				</h1>
-				<!-- 				<ol class="breadcrumb"> -->
-				<!-- 					<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li> -->
-				<!-- 					<li><a href="#">Tables</a></li> -->
-				<!-- 					<li class="active">Data tables</li> -->
-				<!-- 				</ol> -->
+				<h1>Users</h1>
+
 			</section>
 
 			<!-- Main content -->
@@ -103,15 +129,12 @@
 					<div class="col-xs-12">
 						<div class="box">
 							<div class="box-header">
-								<h3 class="box-title">Cars currently in the shop:</h3>
+								<a href="addPerson"><button
+										class="btn btn-primary pull-right">Add New User</button></a>
 
-								<sec:authorize url="/addPerson">
 
-									<a href="addCar"><button class="btn btn-primary pull-right">Add
-											A car</button></a>
-								</sec:authorize>
-								<!--               <button class="btn btn-primary pull-right btn-sm"  type="button">Cancel</button> -->
 							</div>
+
 							<!-- /.box-header -->
 							<div class="box-body">
 								<div id="example2_wrapper"
@@ -127,42 +150,36 @@
 												role="grid" aria-describedby="example2_info">
 												<thead>
 													<tr role="row">
-														<th class="sorting" tabindex="0" aria-controls="example2"
-															rowspan="1" colspan="1"
-															aria-label="Browser: activate to sort column ascending">Make</th>
-														<th class="sorting" tabindex="0" aria-controls="example2"
-															rowspan="1" colspan="1"
-															aria-label="Platform(s): activate to sort column ascending">Model</th>
-														<th class="sorting" tabindex="0" aria-controls="example2"
-															rowspan="1" colspan="1"
-															aria-label="Engine version: activate to sort column ascending">Year</th>
-														<th class="sorting" tabindex="0" aria-controls="example2"
-															rowspan="1" colspan="1"
-															aria-label="CSS grade: activate to sort column ascending">Color</th>
-														<th class="sorting" tabindex="0" aria-controls="example2"
-															rowspan="1" colspan="1"
-															aria-label="CSS grade: activate to sort column ascending">Action</th>
+														<th>First Name</th>
+														<th>Last Name</th>
+														<th>Email</th>
+														<th>User Name</th>
+														<th>Enabled</th>
+														<th>User Roles</th>
+														<th>Edit</th>
+														<th>Delete</th>
 													</tr>
 
 												</thead>
 												<tbody>
 
-													<c:forEach var="car" items="${cars}">
-														<tr role="row" class="even">
-															<td>${car.make}</td>
-															<td>${car.model}</td>
-															<td>${car.year}</td>
-															<td>${car.color}</td>
+													<c:forEach var="person" items="${personsList}">
+														<tr>
+															<td><c:out value="${person.firstname} " /></td>
+															<td><c:out value="${person.lastname}" /></td>
+															<td><c:out value="${person.email}" /></td>
+															<td><c:out value="${person.user.username}" /></td>
+															<td><c:out value="${person.user.enabled}" /></td>
+															<td><c:out value="${person.user.userRoles}" /></td>
 
-															<td><sec:authorize access="hasRole('ROLE_ADMIN')">
-
-																	<a href="cars/${car.id}"><button type="button"
-																			class="btn btn-primary">Edit</button></a>
-																</sec:authorize> <sec:authorize access="hasRole('ROLE_ADMIN')">
-																	<a href="cars/${car.id}"><button type="button"
-																			class="btn btn-danger">Delete</button></a>
-																</sec:authorize></td>
-
+															<td><a
+																href="<spring:url value="/persons/update/${person.id}" />">
+																	<span class="glyphicon glyphicon-pencil"></span>
+															</a></td>
+															<td><a
+																href="<spring:url value="/persons/delete/${person.id}" />">
+																	<span class="glyphicon glyphicon-trash"></span>
+															</a></td>
 														</tr>
 													</c:forEach>
 												</tbody>

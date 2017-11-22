@@ -1,4 +1,3 @@
-
 <%@page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -213,18 +212,15 @@
 				dateFormat : 'yy-mm-dd',
 				minDate:new Date()
 			});
-
 			$('#datetimepicker1').datetimepicker({
 				//format: 'hh:mm A' //12 hour format
 				format : 'HH:mm:ss' //24 hour format
 			});
-
 			$('#datetimepicker1').mousedown(function() {
 				
 			  if (!$.trim($('#datetimepicker1').val()))
 					$('#datetimepicker1').val('12:00');
 			});
-
 		});
 	</script>
 
