@@ -14,6 +14,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.Future;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -26,12 +27,19 @@ public class Session {
 	private Long id;
 	
 	
+	
+	
+	//@Future( message="Date must be in the future")
 	@Temporal(TemporalType.DATE)
-	@Future
+	@DateTimeFormat(pattern = "yyyy-mm-dd")
+	@NotNull(message="Required field")
 	private Date startDate;
 	
-	@Temporal(TemporalType.TIME )
+	
+	
+	@Temporal(TemporalType.TIME)
 	@DateTimeFormat(pattern = "HH:mm:ss")
+	@NotNull(message="Required field")
 	private Date startTime;
 	
 	private int duration;

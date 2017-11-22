@@ -117,7 +117,9 @@
 						<td><form:label path="startDate">Start Date
 				:</form:label></td>
 						<td><form:input placeholder="yyyy-mm-dd" path="startDate"
-								id="datepicker" value="${update.startDate}"  /></td>
+								id="datepicker" value="${update.startDate}"  />
+								<samp class="glyphicon glyphicon-calendar"></samp>
+								</td>
 						<td><form:errors path="startDate" cssStyle="color:red;" /></td>
 					</tr>
 
@@ -194,8 +196,10 @@
 	<!-- Javascript -->
 	<script>
 		$(function() {
+			var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : 'body';
 			$("#datepicker").datepicker({
-				dateFormat : 'yy/mm/dd'
+				dateFormat : 'yy-mm-dd',
+				minDate:new Date()
 			});
 
 			$('#datetimepicker1').datetimepicker({
@@ -204,7 +208,8 @@
 			});
 
 			$('#datetimepicker1').mousedown(function() {
-				if (!$.trim($('#datetimepicker1').val()))
+				
+			  if (!$.trim($('#datetimepicker1').val()))
 					$('#datetimepicker1').val('12:00');
 			});
 

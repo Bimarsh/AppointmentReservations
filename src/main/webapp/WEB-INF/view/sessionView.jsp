@@ -44,8 +44,7 @@
 					   <th>Number of Seats</th>
 					   <th>Location of Session</th>
 					  <th>Counselor of the session</th>
-					  
-						<th>Edit</th>
+					   <th>Edit</th>
 						<th>Delet</th>
 					</tr>
 					<c:forEach items="${sessionList}" var="session">
@@ -53,14 +52,12 @@
 						   <td><c:out value="${session.id} "/></td>
 						  
 							
-							
-							<td><fmt:formatDate pattern="yyyy/mm/dd" value="${session.startDate}"/></td>
+							<td><c:out value="${session.startDate}" /></td>
 							<td><fmt:formatDate pattern="HH:mm:ss" value="${session.startTime}"/></td>
 							<td><c:out value="${session.duration}" /></td>
 							<td><c:out value="${session.seat}" /></td>
 							<td><c:out value="${session.location}" /></td>
 							<td><c:out value="${session.counselor.firstname}" /></td>
-							
 							<td><a
 								href="<spring:url value="/session/updateSession/${session.id}" />">
 									<span class="glyphicon glyphicon-pencil"></span>
