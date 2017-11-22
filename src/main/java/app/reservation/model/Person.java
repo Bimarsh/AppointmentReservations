@@ -1,11 +1,16 @@
 package app.reservation.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import app.reservation.model.User;
@@ -40,6 +45,7 @@ public class Person {
 	@JoinColumn(name = "u_id", referencedColumnName = "id")
 	@OneToOne(cascade=CascadeType.ALL)
 	private User user;
+	
 
 	public User getUser() {
 		return user;
@@ -82,10 +88,7 @@ public class Person {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public void addUser(User user)
-	{
-		
-	}
+	
 
 	
 

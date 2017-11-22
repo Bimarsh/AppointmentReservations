@@ -30,7 +30,7 @@
 	</definition>
 	
 	<definition name="appointmentList" extends="baseLayout">
-		<put-attribute name="content" value="/WEB-INF/views/personList.jsp" />
+		<put-attribute name="content" value="/WEB-INF/views/appointmentList.jsp" />
 	</definition>
 	
 	<definition name="addAppointment" extends="baseLayout">

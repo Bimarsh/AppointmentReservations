@@ -1,6 +1,8 @@
 package app.reservation.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -9,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -44,6 +47,18 @@ public class Session {
 	@OneToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL) 
 	@JoinColumn(name="session-ID") 
 	private Person counselor;
+	
+	@OneToMany(mappedBy="session",fetch=FetchType.EAGER)
+	private List<Appointment> listofAppointments= new ArrayList();
+	
+
+	public List<Appointment> getListofAppointments() {
+		return listofAppointments;
+	}
+
+	public void setListofAppointments(List<Appointment> listofAppointments) {
+		this.listofAppointments = listofAppointments;
+	}
 
 	public Session() {
 		
@@ -110,6 +125,10 @@ public class Session {
 
 	public void setDuration(int duration) {
 		this.duration = duration;
+	}
+	public void addAppointment(Appointment appointment)
+	{
+		listofAppointments.add(appointment);
 	}
 
 	@Override
