@@ -54,4 +54,10 @@ public class PersonServiceImpl implements PersonService {
 		return (List<Person>) personRepository.findAll();
 	}
 
+	@Override
+	public Person findByUserName(String username) {
+		
+		return personRepository.findPersonByUserUsername(username);
+	}
+
 }

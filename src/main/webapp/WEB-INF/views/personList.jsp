@@ -43,8 +43,6 @@
 								<th>Email</th>
 								<th>Userame</th>
 								<th>Role</th>
-								<th>Edit</th>
-								<th>Delete</th>
 							</tr>
 
 						</thead>
@@ -58,16 +56,13 @@
 									<td><c:out value="${person.lastname}" /></td>
 									<td><c:out value="${person.email}" /></td>
 									<td><c:out value="${person.user.username}" /></td>
-									<td><c:forEach items="${person.user.userRoles }" var="role">
-									<c:out value="${role }, " />
-									</c:forEach>
-									</td>
+									<td><c:forEach items="${person.user.userRoles }"
+											var="role">
+											<c:out value="${role }, " />
+										</c:forEach></td>
 
-									<td><a href="<spring:url value="/person/${person.id}" />">
+									<td><a href="<spring:url value="/persons/update/${person.id}" />">
 											<span class="glyphicon glyphicon-pencil"></span>
-									</a></td>
-									<td><a href="<spring:url value="/person/${person.id}" />">
-											<span class="glyphicon glyphicon-trash"></span>
 									</a></td>
 								</tr>
 							</c:forEach>

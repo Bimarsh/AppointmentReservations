@@ -8,4 +8,5 @@ import app.reservation.model.Person;
 @Repository
 public interface PersonRepository extends CrudRepository<Person, Long> {
 
+	Person findPersonByUserUsername(String username);
 }

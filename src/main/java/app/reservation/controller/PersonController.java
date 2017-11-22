@@ -34,64 +34,51 @@ public class PersonController {
 		return Stream.of(UserRoles.values()).map(Enum::name).collect(Collectors.toList());
 	}
 
-	@RequestMapping(value = "/persons", method = RequestMethod.GET)
+	@RequestMapping(value = { "/", "" }, method = RequestMethod.GET)
 	public String getAll(Model model) {
 		model.addAttribute("personsList", personService.findAll());
 		return "personList";
 	}
 
-	@RequestMapping(value = "/persons/add", method = RequestMethod.GET)
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addPerson(@ModelAttribute("person") Person person, Model model) {
 
 		return "person";
 	}
 
-	@RequestMapping(value = "/persons/add", method = RequestMethod.POST)
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String add(@Valid @ModelAttribute("person") Person person, BindingResult br, Model model) {
+		
+		Person p = new Person(); 
+		p = personService.findByUserName(person.getUser().getUsername());
+		if(p.getUser().getUsername() != null) {
+			return "person";
+		}
+		
+		
 		personService.saveUser(person);
 		return "redirect:/persons";
 	}
 
-	@RequestMapping(value = "/persons/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String get(@PathVariable int id, Model model) {
 
 		model.addAttribute("persons", personService.findById((long) id));
 		return "personDetail";
 	}
 
-	@RequestMapping(value = "/persons/{id}", method = RequestMethod.POST)
-	public String update(@PathVariable int id, Person person) {
-		personService.updatePerson(person);
-		return "redirect:/persons";
-	}
-
-	@RequestMapping(value = "/persons/delete", method = RequestMethod.POST)
-	public String delete(int id) {
-		personService.deletePerson((long) id);
-		return "redirect:/persons";
-	}
-	
-	@RequestMapping(value = "/persons/update/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
 	public String updatePersonForm(@PathVariable Long id, @ModelAttribute("person") Person person, Model model) {
-		
+
 		model.addAttribute("mode", "EDIT_PERSON");
 		model.addAttribute("personToUpdate", personService.findById(id));
+		return "person";
+	}
+
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public String updatePerson(@ModelAttribute("person") Person person, BindingResult br, Model model) {
+		personService.saveUser(person);
 		return "redirect:/persons";
 	}
-	@RequestMapping(value = "/persons/update/{id}", method = RequestMethod.POST)
-	public String updatePerson(int id) {
-		personService.deletePerson((long) id);
-		return "redirect:/persons";
-	}
-	
-	/*
-	 * 	@RequestMapping(value = "/updateSession/{id}", method = RequestMethod.GET)
-	public String updateSession(@PathVariable Long id, @ModelAttribute("session") Session session, Model modle) {
-		Session updateSession = sessionService.findOne(id);
-		modle.addAttribute("mode", "EDIT_SESSION");
-		modle.addAttribute("update", updateSession);
-		return "session";
-	}
-	 */
 
 }
