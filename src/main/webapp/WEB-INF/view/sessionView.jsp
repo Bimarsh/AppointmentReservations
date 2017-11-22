@@ -4,9 +4,11 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -184,6 +186,74 @@
 				</div>
 			</section>
 		</div>
+
+	</section>
+
+
+
+
+
+
+		<c:choose>
+			<c:when test="${sessionList.size()!=0}" >
+				<table class="table table-striped">
+				
+					<tr>
+						
+					   <th>Id</th>
+					   <th>SessionStart Date</th>
+					  <th>Session Start Time</th>
+					  <th>Session Duration</th>
+					   <th>Number of Seats</th>
+					   <th>Location of Session</th>
+					  <th>Counselor of the session</th>
+					  
+						<th>Edit</th>
+						<th>Delet</th>
+					</tr>
+					<c:forEach items="${sessionList}" var="session">
+						<tr>
+						   <td><c:out value="${session.id} "/></td>
+						  
+							
+							
+							<td><fmt:formatDate pattern="yyyy/mm/dd" value="${session.startDate}"/></td>
+							<td><fmt:formatDate pattern="HH:mm:ss" value="${session.startTime}"/></td>
+							<td><c:out value="${session.duration}" /></td>
+							<td><c:out value="${session.seat}" /></td>
+							<td><c:out value="${session.location}" /></td>
+							<td><c:out value="${session.counselor.firstname}" /></td>
+							
+							<td><a
+								href="<spring:url value="/session/updateSession/${session.id}" />">
+									<span class="glyphicon glyphicon-pencil"></span>
+							</a></td>
+							<td><a
+								href="<spring:url value="/session/deletSession/${session.id}" />">
+									<span class="glyphicon glyphicon-trash"></span>
+							</a></td>
+						
+							
+
+						</tr>
+					</c:forEach>
+
+
+				</table>
+			</c:when>
+			<c:otherwise>
+          <form:errors cssStyle="background:white;color:red;"><b> No session is Created:</b></form:errors>
+			</c:otherwise>
+
+		</c:choose>
+
+
+
+<a href="<spring:url value="/session/addsession" />"
+			class="btn btn-primary"> <span class=""></span> Add Session
+		</a>
+
 	</div>
+
 </body>
 </html>
