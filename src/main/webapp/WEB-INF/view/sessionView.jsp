@@ -4,6 +4,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"  %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 
 <html>
 <head>
@@ -39,7 +41,8 @@
 					   <th>SessionStart Date</th>
 					  <th>Session Start Time</th>
 					  <th>Session Duration</th>
-					   <th>Seats Reserved</th>
+					   <th>Number of Seats</th>
+					   <th>Location of Session</th>
 					  <th>Counselor of the session</th>
 					  
 						<th>Edit</th>
@@ -49,11 +52,13 @@
 						<tr>
 						   <td><c:out value="${session.id} "/></td>
 						  
-							<td><c:out value="${session.startDate}" /></td>
 							
-							<td><c:out value="${session.startTime}" /></td>
+							
+							<td><fmt:formatDate pattern="yyyy/mm/dd" value="${session.startDate}"/></td>
+							<td><fmt:formatDate pattern="HH:mm:ss" value="${session.startTime}"/></td>
 							<td><c:out value="${session.duration}" /></td>
 							<td><c:out value="${session.seat}" /></td>
+							<td><c:out value="${session.location}" /></td>
 							<td><c:out value="${session.counselor.firstname}" /></td>
 							
 							<td><a
