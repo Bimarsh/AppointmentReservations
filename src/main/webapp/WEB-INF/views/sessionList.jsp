@@ -18,11 +18,9 @@
 	<div class="box-header">
 		<h3 class="box-title">All Sessions:</h3>
 
-		<sec:authorize url="/addSession">
-
+		<sec:authorize access="hasRole('ROLE_ADMIN')" >
 			<a href="<spring:url value="/session/add" />"><button
-					class="btn btn-primary pull-right">Add A Session</button></a>
-		</sec:authorize>
+					class="btn btn-primary pull-right">Add A Session</button></a></sec:authorize>
 		<!--               <button class="btn btn-primary pull-right btn-sm"  type="button">Cancel</button> -->
 	</div>
 	<!-- /.box-header -->
@@ -46,8 +44,10 @@
 								<th>Session Duration</th>
 								<th>Seats Reserved</th>
 								<th>Counselor of the session</th>
+								<sec:authorize access="hasRole('ROLE_ADMIN')" >
 								<th>Edit</th>
 								<th>Delete</th>
+								</sec:authorize>
 							</tr>
 
 						</thead>
@@ -62,15 +62,16 @@
 									<td><c:out value="${session.duration}" /></td>
 									<td><c:out value="${session.seat}" /></td>
 									<td><c:out value="${session.counselor.firstname}" /></td>
-
+									<sec:authorize access="hasRole('ROLE_ADMIN')" >
 									<td><a
 										href="<spring:url value="/session/updateSession/${session.id}" />">
 											<span class="glyphicon glyphicon-pencil"></span>
 									</a></td>
 									<td><a
-										href="<spring:url value="/session/deletSession/${session.id}" />">
+										href="<spring:url value="/session/deletSession/${session.id}" />" onclick="return confirm('Are you sure you want to delete this session?');">
 											<span class="glyphicon glyphicon-trash"></span>
 									</a></td>
+									</sec:authorize>
 								</tr>
 							</c:forEach>
 
@@ -81,5 +82,20 @@
 		</div>
 	</div>
 </body>
-
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                ...
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-danger btn-ok">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
 </html>

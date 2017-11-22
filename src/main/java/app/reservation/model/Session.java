@@ -31,7 +31,7 @@ public class Session {
 	private Date startDate;
 	
 	@Temporal(TemporalType.TIME )
-	@DateTimeFormat(pattern = "HH:mm:ss")
+	@DateTimeFormat(pattern = "HH:mm")
 	private Date startTime;
 	
 	private int duration;

@@ -20,7 +20,7 @@
 				<!-- Notifications: style can be found in dropdown.less -->
 				<li class="dropdown user user-menu"><a href="#"
 					class="dropdown-toggle" data-toggle="dropdown"> <span
-						class="hidden-xs">Hi, ${user }<sec:authorize access="isAuthenticated()">  
+						class="hidden-xs">Hi, <sec:authorize access="isAuthenticated()">  
         <strong><sec:authentication property="principal.username"/></strong>
     </sec:authorize></span>
 				</a></li>

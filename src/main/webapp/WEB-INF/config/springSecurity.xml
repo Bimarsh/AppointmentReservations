@@ -9,12 +9,17 @@
 
 	<http auto-config="true">
 		<!-- true defaults <form-login/> -->
-
-		<intercept-url pattern="/home" access="hasAnyRole('ROLE_ADMIN','ROLE_COUNSELOR','ROLE_CUSTOMER')" />
+		<access-denied-handler error-page="/403" />
+<!-- 		<intercept-url pattern="/home" access="hasAnyRole('ROLE_ADMIN','ROLE_COUNSELOR','ROLE_CUSTOMER')" /> -->
+		<intercept-url pattern="/persons" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/persons/*" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/session/*" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/session" access="hasAnyRole('ROLE_ADMIN','ROLE_COUNSELOR','ROLE_CUSTOMER')" />
+		<intercept-url pattern="/appointments/*" access="hasAnyRole('ROLE_ADMIN','ROLE_COUNSELOR','ROLE_CUSTOMER')" />
 		
 		<csrf disabled="true"/>
 		<form-login login-page="/login" authentication-failure-url="/"
-			always-use-default-target="true" default-target-url="/home" />
+			always-use-default-target="true" default-target-url="/session" />
 			<logout logout-success-url="/" delete-cookies="JSESSIONID" invalidate-session="true" />
 	</http>
 

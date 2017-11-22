@@ -45,6 +45,9 @@ public class PersonController {
 
 	@RequestMapping(value = "/persons/add", method = RequestMethod.POST)
 	public String add(@Valid @ModelAttribute("person") Person person, BindingResult br, Model model) {
+		if (br.hasErrors()) {
+			return "person";
+		}
 		personService.saveUser(person);
 		return "redirect:/persons";
 	}
