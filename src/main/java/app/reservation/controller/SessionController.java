@@ -81,7 +81,7 @@ public class SessionController {
 		
 	}
 	
-	@RequestMapping(value = "/sessionList", method = RequestMethod.GET)
+	@RequestMapping(value = {"/sessionList","/",""}, method = RequestMethod.GET)
 	public String getSessionList(Model model) {
 
 		 model.addAttribute("sessionList", sessionService.findAll());
