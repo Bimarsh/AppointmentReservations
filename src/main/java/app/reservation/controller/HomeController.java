@@ -45,7 +45,7 @@ public class HomeController {
 		System.out.println("all the names........................"+name);
 		User user = userRepoository.findByUsername(name);
 		session.setAttribute("user", user);
-		return "carList";
+		return "sessionList";
 		
 	}
 	

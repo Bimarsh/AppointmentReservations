@@ -10,12 +10,12 @@
 	<http auto-config="true">
 		<!-- true defaults <form-login/> -->
 
-		<intercept-url pattern="/home" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/home" access="hasAnyRole('ROLE_ADMIN','ROLE_COUNSELOR','ROLE_CUSTOMER')" />
 		
 		<csrf disabled="true"/>
-		<form-login login-page="/login" authentication-failure-url="/login.jsp"
+		<form-login login-page="/login" authentication-failure-url="/"
 			always-use-default-target="true" default-target-url="/home" />
-			<logout logout-success-url="/login.jsp" delete-cookies="JSESSIONID" invalidate-session="true" />
+			<logout logout-success-url="/" delete-cookies="JSESSIONID" invalidate-session="true" />
 	</http>
 
 	<authentication-manager>

@@ -8,7 +8,8 @@ public interface AppointmentService {
 
 	public void save(Appointment appointment);
 
-	public Appointment getAppointment(Long appointmentid);
+	
+	public List<Appointment> getAppointmentByPersonId(long personId);
 
 	public List<Appointment> getAllAppointment();
 
