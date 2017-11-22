@@ -41,7 +41,7 @@
 						<!-- Notifications: style can be found in dropdown.less -->
 						<li class="dropdown user user-menu"><a href="#"
 							class="dropdown-toggle" data-toggle="dropdown"> <span
-								class="hidden-xs">Hi, User</span>
+								class="hidden-xs">Hi,${sessionScope.user.username}</span>
 						</a></li>
 						<li><a href="logout"
 							data-toggle="control-sidebar"><i class="fa fa-gears"></i>

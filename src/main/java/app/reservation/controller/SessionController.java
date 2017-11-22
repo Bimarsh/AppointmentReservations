@@ -20,51 +20,45 @@ import app.reservation.model.Person;
 import app.reservation.model.Session;
 import app.reservation.service.SessionService;
 
-
-
 @Controller
 @RequestMapping("/session")
 @SessionAttributes({"update"})
 public class SessionController {
-	
+
 	@Autowired
 	private SessionService sessionService;
-	
-	
 
-	@RequestMapping(value ="/addsession", method = RequestMethod.GET)
-	public String getSessionForm(@ModelAttribute("session") Session session,Model model) {
-		
-		List<String>coun=new ArrayList<String>();
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	public String getSessionForm(@ModelAttribute("session") Session session, Model model) {
+
+		List<String> coun = new ArrayList<String>();
 		coun.add("Lwam");
 		coun.add("Yoni");
 		coun.add("Bereket");
 		coun.add("tekle");
-		model.addAttribute("coun",coun);
-		
-   return "session";
+		model.addAttribute("coun", coun);
+
+		return "session";
 	}
-	
-	@RequestMapping(value ="/addsession", method = RequestMethod.POST)
-	public String addSession(@Valid @ModelAttribute("session") Session session,BindingResult result,Model model) {
-		
-		if (result.hasErrors() ) {
+
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	public String addSession(@Valid @ModelAttribute("session") Session session, BindingResult result, Model model) {
+
+		if (result.hasErrors()) {
 
 			return "session";
 
 		}
-		System.out.println("+++++++++++"+session);
-		Person person=new Person();
+		System.out.println("+++++++++++" + session);
+		Person person = new Person();
 		person.setFirstname("session.firstname");
-		
-		
+
 		sessionService.save(session);
-		
-       return "redirect:/session/sessionList";
-	
+
+		return "redirect:/session/sessionList";
+
 	}
-	
-	
+
 	@RequestMapping(value = "/updateSession/{id}", method = RequestMethod.GET)
 	public String updateSession(@PathVariable Long id, @ModelAttribute("session") Session session, Model modle) {
 		Session updateSession = sessionService.findOne(id);
@@ -72,22 +66,21 @@ public class SessionController {
 		modle.addAttribute("update", updateSession);
 		return "session";
 	}
-	
-	@RequestMapping(value="/deletSession/{id}",method=RequestMethod.GET)
-	public String deletSession(@PathVariable Long id,RedirectAttributes redirect){
-		
+
+	@RequestMapping(value = "/deletSession/{id}", method = RequestMethod.GET)
+	public String deletSession(@PathVariable Long id, RedirectAttributes redirect) {
+
 		sessionService.delete(id);
-		  return "redirect:/session/sessionList";
-		
+		return "redirect:/session/sessionList";
+
 	}
-	
-	@RequestMapping(value = {"/sessionList","/",""}, method = RequestMethod.GET)
+
+	@RequestMapping(value = { "/sessionList", "/", "" }, method = RequestMethod.GET)
 	public String getSessionList(Model model) {
 
-		 model.addAttribute("sessionList", sessionService.findAll());
-		System.out.println("===="+ sessionService.findAll());
+		model.addAttribute("sessionList", sessionService.findAll());
+		System.out.println("====" + sessionService.findAll());
 		return "sessionView";
 	}
 
-	
 }
