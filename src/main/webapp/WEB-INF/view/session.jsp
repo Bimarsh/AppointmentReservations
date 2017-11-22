@@ -86,8 +86,8 @@
     <tr>
 			<td><form:label path="counselor.firstname">Counselor:</form:label></td>
 			<td><form:select path="counselor.firstname"  >
-				<form:option value="" label="--select  Counselor--" />
-				<form:options items="${coun}"  />
+				<form:option value="false" label="false" />
+				<form:option value="true" label="true" />
 				
 			</form:select></td>
 			<td>
