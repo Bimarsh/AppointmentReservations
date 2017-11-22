@@ -22,7 +22,7 @@
 		<property name="url"
 			value="jdbc:mysql://localhost:3306/appointmentReservations?useSSL=false" />
 		<property name="username" value="root" />
-		<property name="password" value="root" />
+		<property name="password" value="puppets" />
 	</bean>
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
