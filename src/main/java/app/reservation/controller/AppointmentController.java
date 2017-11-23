@@ -1,5 +1,8 @@
 package app.reservation.controller;
 
+import java.util.Date;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.constraints.Email;
 
@@ -19,6 +22,7 @@ import app.reservation.model.Mail;
 import app.reservation.model.Person;
 import app.reservation.model.Session;
 import app.reservation.model.User;
+import app.reservation.model.UserRoles;
 import app.reservation.repository.UserRepository;
 import app.reservation.service.AppointmentService;
 import app.reservation.service.EmailService;
@@ -60,7 +64,7 @@ public class AppointmentController {
 		int a = sessionof.getSeat() - 1;
 		sessionof.setSeat(a);
 		sessionService.update(sessionof);
-		emailService.sendMailAfterCreateAppointment(user, appointment);
+		emailService.sendMailAfterCreateAppointment(user, appointment, "create");
 		System.out.println("........................................................");
 
 		return "redirect:/appointment/appointmentList/";// + appointment.getPerson().getId();
@@ -91,12 +95,33 @@ public class AppointmentController {
 
 	@RequestMapping(value = "/deletAppointment/{id}", method = RequestMethod.GET)
 	public String deleteAppointment(@PathVariable long id) {
+		
 		Appointment appointment = appointmentService.findById(id);
+		Authentication authority = SecurityContextHolder.getContext().getAuthentication();
+		String name = authority.getName();
+		User user = userRepository.findByUsername(name);
+		Date date = new Date();
+		Date time = appointment.getSession().getStartDate();
+		boolean roleAdmin = false;;
+		if (user != null) {
+			roleAdmin = true;
+		} else {
+			List<UserRoles> userRoles = user.getUserRoles();
+			for (UserRoles u : userRoles) {
+				if (u.equals(UserRoles.ROLE_ADMIN)) roleAdmin = true;
+			}
+		}
+		
+		System.out.println(time);
+		System.out.println(date.compareTo(appointment.getSession().getStartDate()) + " This is the within 24 hours");
+		if (date.compareTo(appointment.getSession().getStartDate()) <= 2 && !roleAdmin) {
+			return "redirect:/appointment/appointmentList";
+		}
 		Session session = appointment.getSession();
-		session.setSeat(session.getSeat()+11);
+		session.setSeat(session.getSeat()+1);
 		sessionService.update(session);
 		appointmentService.delete(id);
-
+		emailService.sendMailAfterCreateAppointment(user, appointment, "canceled");
 		return "redirect:/appointment/appointmentList";
 
 	}

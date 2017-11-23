@@ -71,70 +71,50 @@ public class EmailServiceImpl implements EmailService {
 		return content.toString();
 	}
 
-	 @Scheduled(cron = "0/5 * * * * *")
+//	 @Scheduled(cron = "0/60 * * * * *")
 	public void sendReminder() {
 		System.out.println("scheduler is running xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
 		Date date = new Date();
 		Date time = new Date();
 		date.setDate(date.getDate() + 1);
-		System.out.println(date.toString());
-		SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd"); 
-		SimpleDateFormat dt2 = new SimpleDateFormat("HH:mm:ss"); 
 		time.setSeconds(0);
 		time.setHours(time.getHours() + 12);
-		System.out.println(time.toString());
 		List<Appointment> li = appointmentService.getAllAppointment();
-		for (Appointment a : li) {
-			if (a.getSession().getStartDate().equals(date)) {
-				System.out.println("Equal Date");
-			}
-			
-			if (a.getSession().getStartTime().equals(time)) {
-				System.out.println("Equal Time");
-			}
-			
-			System.out.println(a.toString());
-//			listEmail.add(a.getPerson().getEmail());
-		}
-		List<Appointment> appointments = appointmentService.findSessionBy36hours(date, time);
 		List<String> listEmail = new ArrayList<>();
-		for (Appointment a : appointments) {
-			if (a.getSession().getStartDate().equals(date)) {
-				System.out.println("Equal Date");
+		Appointment app = null;
+		for (Appointment a : li) {
+			if (a.getSession().getStartDate().getDate() == date.getDate() && a.getSession().getStartTime().getHours() == time.getHours()
+					&& a.getSession().getStartTime().getMinutes() == time.getMinutes()) {
+				listEmail.add(a.getPerson().getEmail());
+				System.out.println("=====================================================");
+				System.out.println(a.toString());
+				app = a;
 			}
-			
-			if (a.getSession().getStartTime().equals(time)) {
-				System.out.println("Equal Time");
-			}
-			
-			System.out.println(a.toString());
-			listEmail.add(a.getPerson().getEmail());
 		}
 		
-		if (appointments.size() > 0) {
-			String emailTo = listEmail.stream()
-	                .map(String::toUpperCase)
+		if (listEmail.size() > 0) {
+			String emailTo = listEmail.stream()	                
 	                .collect(Collectors.joining(","));
+			System.out.println(emailTo);
 			Mail mail = new Mail();
 			mail.setMailTemplate("email-template.vm");
 			mail.setMailFrom("tm.reservation.checking@gmail.com");
 			mail.setMailTo(emailTo);
-			Appointment a = appointments.get(0);
 			mail.setMailSubject("This is an reminder email from TM Checking Online Reservation System");
 
 			Map<String, Object> modelMail = new HashMap<String, Object>();
 //			modelMail.put("firstName", user.getPerson().getFirstname());
 //			modelMail.put("lastName", user.getPerson().getLastname());
-			modelMail.put("date", a.getSession().getStartDate());
-			modelMail.put("time", a.getSession().getStartTime());
-			modelMail.put("location", a.getSession().getLocation());
+			modelMail.put("date", app.getSession().getStartDate());
+			modelMail.put("time", app.getSession().getStartTime());
+			modelMail.put("location", app.getSession().getLocation());
 			mail.setModel(modelMail);
 			sendEmail(mail);
 		}
 		
 	}
 
-	public void sendMailAfterCreateAppointment(User user, Appointment appointment) {
+	public void sendMailAfterCreateAppointment(User user, Appointment appointment, String action) {
 		Mail mail = new Mail();
 		mail.setMailTemplate("email-template.vm");
 		mail.setMailFrom("tm.reservation.checking@gmail.com");
@@ -143,6 +123,7 @@ public class EmailServiceImpl implements EmailService {
 		mail.setMailSubject("This is an email from TM Checking Online Reservation System");
 
 		Map<String, Object> modelMail = new HashMap<String, Object>();
+		modelMail.put("action", action);
 		modelMail.put("firstName", user.getPerson().getFirstname());
 		modelMail.put("lastName", user.getPerson().getLastname());
 		modelMail.put("date", appointment.getSession().getStartDate());

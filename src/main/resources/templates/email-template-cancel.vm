@@ -4,7 +4,7 @@
  
 <body>
     <p>Dear ${firstName} ${lastName},</p>
-    <p>You have just ${action} a TM Checking on ${date} ${time} at ${location}</p>
+    <p>You have just book a TM Checking on ${date} ${time} at ${location}</p>
     <p>Please be on time</p>
     <p>Thank you</p>
 </body>

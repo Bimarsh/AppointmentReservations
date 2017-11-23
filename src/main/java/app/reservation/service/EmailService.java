@@ -6,5 +6,5 @@ import app.reservation.model.User;
 
 public interface EmailService {
 	public void sendEmail(Mail mail);
-	public void sendMailAfterCreateAppointment(User user, Appointment appointment);
+	public void sendMailAfterCreateAppointment(User user, Appointment appointment, String action);
 }
