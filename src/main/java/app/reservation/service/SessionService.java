@@ -13,7 +13,5 @@ public interface SessionService {
 	public List<Session> findAll();
 	public Session findOne(Long id);
 	public void delete(Long id);
-	public List<Session> findSessionBy36hours(Date date, Date time);
-	
 
 }

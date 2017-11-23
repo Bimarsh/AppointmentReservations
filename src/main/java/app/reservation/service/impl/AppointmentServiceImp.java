@@ -1,5 +1,6 @@
 package app.reservation.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,16 @@ public class AppointmentServiceImp implements AppointmentService {
 	public void update(Appointment appointment) {
 
 		appoinymentRepository.save(appointment);
+	}
+
+	@Override
+	public Appointment findById(Long appointmentId) {
+		return appoinymentRepository.findOne(appointmentId);
+	}
+
+	@Override
+	public List<Appointment> findSessionBy36hours(Date date, Date time) {
+		return appoinymentRepository.findSessionBefore36hours(date, time);
 	}
 
 }

@@ -4,10 +4,9 @@
  
 <body>
     <p>Dear ${firstName} ${lastName},</p>
-    <p>Sending Email using Spring 4 with <b>Velocity Template!!!</b></p>
-    <p>Thanks</p>
-    <p>${signature}</p>
-    <p>${location}</p>
+    <p>You have just book a TM Checking on ${date} ${time} at ${location}</p>
+    <p>Please be on time</p>
+    <p>Thank you</p>
 </body>
  
 </html>

@@ -89,7 +89,7 @@
 							class="fa fa-users"></i> <span>Users</span>
 					</a></li>
 					</sec:authorize>
-					<li id="session_menu"><a href="<c:url value = "/session"/>">
+					<li id="session_menu"><a href="<c:url value = "/session/sessionList"/>">
 							<i class="fa fa-envelope"></i> <span>Sessions</span>
 					</a></li>
 				</ul>

@@ -1,5 +1,7 @@
 package app.reservation.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -10,8 +12,13 @@ import javax.persistence.ManyToOne;
 import app.reservation.model.Session;
 
 @Entity
-public class Appointment {
+public class Appointment implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5084372743640867081L;
+
 	public Appointment() {
 		// TODO Auto-generated constructor stub
 	}

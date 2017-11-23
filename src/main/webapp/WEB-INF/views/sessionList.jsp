@@ -19,7 +19,7 @@
 		<h3 class="box-title"><c:out value="${sessionScope.user }"></c:out>All Sessions:</h3>
 		
 		<sec:authorize access="hasRole('ROLE_ADMIN')" >
-			<a href="<spring:url value="/session/add" />"><button
+			<a href="<spring:url value="/session/addSession" />"><button
 					class="btn btn-primary pull-right">Add A Session</button></a></sec:authorize>
 		<!--               <button class="btn btn-primary pull-right btn-sm"  type="button">Cancel</button> -->
 	</div>
@@ -43,6 +43,7 @@
 								<th>Session Start Time</th>
 								<th>Session Duration</th>
 								<th>Seats Reserved</th>
+								<th>Location</th>
 								<th>Counselor of the session</th>
 								<sec:authorize access="hasRole('ROLE_ADMIN')" >
 								<th>Edit</th>
@@ -64,6 +65,7 @@
 									<td><c:out value="${session.startTime}" /></td>
 									<td><c:out value="${session.duration}" /></td>
 									<td><c:out value="${session.seat}" /></td>
+									<td><c:out value="${session.location}" /></td>
 									<td><c:out value="${session.counselor.firstname}" /></td>
 									<sec:authorize access="hasRole('ROLE_ADMIN')" >
 									<td><a
