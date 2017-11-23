@@ -8,9 +8,12 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import app.reservation.model.Person;
 import app.reservation.model.Session;
 
 @Repository
 public interface SessionRepository extends CrudRepository<Session, Long> {
+	
+	public List<Session> getSesssionByCounselor(Person person);
 	
 }

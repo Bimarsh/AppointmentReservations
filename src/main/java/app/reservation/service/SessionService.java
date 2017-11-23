@@ -3,6 +3,7 @@ package app.reservation.service;
 import java.util.Date;
 import java.util.List;
 
+import app.reservation.model.Person;
 import app.reservation.model.Session;
 
 public interface SessionService {
@@ -13,5 +14,6 @@ public interface SessionService {
 	public List<Session> findAll();
 	public Session findOne(Long id);
 	public void delete(Long id);
+	public List<Session> getSesssionByCounselor(Person person);
 
 }

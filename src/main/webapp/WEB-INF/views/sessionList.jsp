@@ -18,7 +18,9 @@
 	<div class="box-header">
 		<h3 class="box-title">
 			<c:out value="${sessionScope.user }"></c:out>
-			All Sessions:
+			All Sessions:  <sec:authorize access="hasRole('ROLE_COUNSELOR')">
+			<a href="<spring:url value="/session/counselor" />"><u>View Assigned Sessions</u></a>
+		</sec:authorize>
 		</h3>
 
 		<sec:authorize access="hasRole('ROLE_ADMIN')">

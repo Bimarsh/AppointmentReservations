@@ -47,6 +47,7 @@ public class AppointmentController {
 	@RequestMapping(value = "/addAppointment/{id}", method = RequestMethod.GET)
 	public String add(@PathVariable long id, HttpSession session) {
 		// Get current user
+		
 		Authentication authority = SecurityContextHolder.getContext().getAuthentication();
 		String name = authority.getName();
 		System.out.println("all the names........................" + name);
@@ -55,7 +56,7 @@ public class AppointmentController {
 
 		// get Session
 		Session sessionof = sessionService.findOne(id);
-
+        
 		// create appointment
 		Appointment appointment = new Appointment();
 		appointment.setPerson(person);

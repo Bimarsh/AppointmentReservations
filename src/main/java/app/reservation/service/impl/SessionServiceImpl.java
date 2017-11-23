@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import app.reservation.model.Person;
 import app.reservation.model.Session;
 import app.reservation.repository.SessionRepository;
 import app.reservation.service.SessionService;
@@ -46,6 +47,12 @@ public class SessionServiceImpl implements SessionService {
 	public void delete(Long id) {
 		sessionRepository.delete(id);
 		
+	}
+
+	@Override
+	public List<Session> getSesssionByCounselor(Person person) {
+		// TODO Auto-generated method stub
+		return sessionRepository.getSesssionByCounselor(person);
 	}
 	
 }
