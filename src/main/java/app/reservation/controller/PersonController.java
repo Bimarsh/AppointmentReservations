@@ -53,7 +53,7 @@ public class PersonController {
 
 		Person p = null;
 		p = personService.findByUserName(person.getUser().getUsername());
-		if (p != null) {
+		if (p != null || br.hasErrors()) {
 			return "person";
 		}
 		redirectAttributes.addFlashAttribute("flashMessage", "Person Added Successfully");
@@ -80,6 +80,11 @@ public class PersonController {
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String updatePerson(@ModelAttribute("person") Person person, BindingResult br, Model model,
 			RedirectAttributes redirectAttributes) {
+		
+		if(br.hasErrors()) {
+			return "person";
+		}
+		
 		personService.saveUser(person);
 
 		redirectAttributes.addFlashAttribute("flashMessage", "Person Modified Successfully");

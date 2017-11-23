@@ -55,6 +55,7 @@ public class Person implements Serializable {
 	private String email;
 	
 	@Valid
+	@NotNull
 	@JoinColumn(name = "u_id", referencedColumnName = "id")
 	@OneToOne(cascade=CascadeType.ALL)
 	private User user;

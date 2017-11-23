@@ -18,11 +18,6 @@
 	<div class="box-header">
 		<h3 class="box-title">All Sessions:</h3>
 
-		<sec:authorize url="/addSession">
-
-			<a href="<spring:url value="/appointment/addAppointment" />"><button
-					class="btn btn-primary pull-right">Make Appointment</button></a>
-		</sec:authorize>
 		<!--               <button class="btn btn-primary pull-right btn-sm"  type="button">Cancel</button> -->
 	</div>
 	<!-- /.box-header -->
@@ -45,7 +40,6 @@
 								<th>Start Time</th>
 								<th>Duration</th>
 								<th>Counselor of the session</th>
-								<th>Edit</th>
 								<th>Action</th>
 							</tr>
 
@@ -61,10 +55,6 @@
 									<td><c:out value="${appointment.session.duration}" /></td>
 									<td><c:out value="${appointment.session.counselor.firstname}" /></td> 
 
-									<td><a
-										href="<spring:url value="/appointment/updateAppointment/${appointment.id}" />">
-											<span class="glyphicon glyphicon-pencil"></span>
-									</a></td>
 									<td><a
 										href="<spring:url value="/appointment/deletAppointment/${appointment.id}" />">
 											<button class="btn-small btn-danger" onclick="return confirm('Are you sure you want to cancel this appointment??');">Cancel</button>
