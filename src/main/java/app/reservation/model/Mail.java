@@ -2,7 +2,10 @@ package app.reservation.model;
 
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Value;
+
 public class Mail {
+	@Value("${email.name}")
 	private String mailFrom;
 	 
     private String mailTo;

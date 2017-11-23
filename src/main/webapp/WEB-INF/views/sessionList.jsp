@@ -16,8 +16,8 @@
 <body>
 	<!-- Main content -->
 	<div class="box-header">
-		<h3 class="box-title">All Sessions:</h3>
-
+		<h3 class="box-title"><c:out value="${sessionScope.user }"></c:out>All Sessions:</h3>
+		
 		<sec:authorize access="hasRole('ROLE_ADMIN')" >
 			<a href="<spring:url value="/session/add" />"><button
 					class="btn btn-primary pull-right">Add A Session</button></a></sec:authorize>
@@ -48,6 +48,9 @@
 								<th>Edit</th>
 								<th>Delete</th>
 								</sec:authorize>
+								<sec:authorize access="hasRole('ROLE_CUSTOMER')" >
+								<th>Appointment</th>
+								</sec:authorize>
 							</tr>
 
 						</thead>
@@ -72,6 +75,12 @@
 											<span class="glyphicon glyphicon-trash"></span>
 									</a></td>
 									</sec:authorize>
+									<sec:authorize access="hasRole('ROLE_CUSTOMER')" >
+									<td><a href="<spring:url value="/appointment/addAppointment/${session.id }" />">
+									<c:if test="${session.seat > 0 }">
+									<button	class="btn btn-primary">Make Appointment</button></c:if></a></td>
+						</sec:authorize>
+									
 								</tr>
 							</c:forEach>
 
@@ -82,20 +91,4 @@
 		</div>
 	</div>
 </body>
-<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                ...
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-danger btn-ok">Delete</a>
-            </div>
-        </div>
-    </div>
-</div>
 </html>

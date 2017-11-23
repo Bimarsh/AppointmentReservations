@@ -15,7 +15,7 @@
 		<intercept-url pattern="/persons/*" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/session/*" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/session" access="hasAnyRole('ROLE_ADMIN','ROLE_COUNSELOR','ROLE_CUSTOMER')" />
-		<intercept-url pattern="/appointments/*" access="hasAnyRole('ROLE_ADMIN','ROLE_COUNSELOR','ROLE_CUSTOMER')" />
+		<intercept-url pattern="/appointment/*" access="hasAnyRole('ROLE_ADMIN','ROLE_COUNSELOR','ROLE_CUSTOMER')" />
 		
 		<csrf disabled="true"/>
 		<form-login login-page="/login" authentication-failure-url="/"

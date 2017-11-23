@@ -18,6 +18,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.Future;
 
+import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
 
 
@@ -38,6 +39,7 @@ public class Session {
 	private Date startTime;
 	
 	private int duration;
+	@Range(min=0, max=25)
 	private Integer seat;
 	
 	private String location;

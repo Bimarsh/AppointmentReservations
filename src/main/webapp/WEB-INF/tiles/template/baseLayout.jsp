@@ -81,7 +81,7 @@
 				<ul class="sidebar-menu tree" data-widget="tree">
 
 					<li id="appointment_menu"><a
-						href="<c:url value = "/appointments"/>"> <i
+						href="<c:url value = "/appointment/appointmentList"/>"> <i
 							class="fa fa-calendar"></i> <span>Appointments</span>
 					</a></li>
 					<sec:authorize access="hasRole('ROLE_ADMIN')" >

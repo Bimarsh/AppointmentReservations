@@ -20,8 +20,8 @@
 
 		<sec:authorize url="/addSession">
 
-			<a href="<spring:url value="/session/addsession" />"><button
-					class="btn btn-primary pull-right">Add A Session</button></a>
+			<a href="<spring:url value="/appointment/addAppointment" />"><button
+					class="btn btn-primary pull-right">Make Appointment</button></a>
 		</sec:authorize>
 		<!--               <button class="btn btn-primary pull-right btn-sm"  type="button">Cancel</button> -->
 	</div>
@@ -41,12 +41,10 @@
 						<thead>
 							<tr role="row">
 								<th>Id</th>
-								<th>SessionStart Date</th>
-								<th>Session Start Time</th>
-								<th>Session Duration</th>
+								<th>Start Date</th>
+								<th>Start Time</th>
 								<th>Seats Reserved</th>
 								<th>Counselor of the session</th>
-								<th>asdfasd</th>
 								<th>Edit</th>
 								<th>Delete</th>
 							</tr>
@@ -57,12 +55,10 @@
 								<tr>
 									<td><c:out value="${appointment.id} " /></td>
 
-									<td><c:out value="${appointment.session.id}" /></td>
-									<td><c:out value="${appointment.person.id}" /></td>
 
+									<td><c:out value="${appointment.session.startDate}" /></td>
 									<td><c:out value="${appointment.session.startTime}" /></td>
 									<td><c:out value="${appointment.session.duration}" /></td>
-									<td><c:out value="${appointment.session.seat}" /></td>
 									<td><c:out value="${appointment.session.counselor.firstname}" /></td> 
 
 									<td><a

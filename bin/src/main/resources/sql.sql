@@ -1,2 +1,0 @@
-INSERT INTO `appointmentReservation`.`user`(`username`, `password`, `enabled`, `role`) VALUES ('admin', 'admin', True, 1);
-INSERT INTO `appointmentReservation`.`role`(`id`, `role`) VALUES ('1','ROLE_ADMIN');
