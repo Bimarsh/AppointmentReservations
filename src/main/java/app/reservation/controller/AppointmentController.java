@@ -45,7 +45,7 @@ public class AppointmentController {
 	private EmailService emailService;
 
 	@RequestMapping(value = "/addAppointment/{id}", method = RequestMethod.GET)
-	public String add(@PathVariable long id, HttpSession session) {
+	public String add(@PathVariable long id, HttpSession session,Model model) {
 		// Get current user
 		
 		Authentication authority = SecurityContextHolder.getContext().getAuthentication();
@@ -56,6 +56,15 @@ public class AppointmentController {
 
 		// get Session
 		Session sessionof = sessionService.findOne(id);
+		
+		//check duplicate appointment entry
+		
+		Appointment apt= appointmentService.findDuplicateAptmt(sessionof.getId(), person.getId());
+		
+		if(apt !=null) {
+			model.addAttribute("duplicate", "You have already booked for this appointment");
+			return "appointmentList";
+		}
         
 		// create appointment
 		Appointment appointment = new Appointment();
@@ -70,7 +79,11 @@ public class AppointmentController {
 
 		return "redirect:/appointment/appointmentList/";// + appointment.getPerson().getId();
 	}
-
+//	public boolean checkforDuplicate(Session session)
+//	{
+//		session.
+//	}
+	
 	@RequestMapping(value = "/appointmentList", method = RequestMethod.GET)
 	public String getAllAppointments(Model model) {
 		model.addAttribute("appointments", appointmentService.getAllAppointment());

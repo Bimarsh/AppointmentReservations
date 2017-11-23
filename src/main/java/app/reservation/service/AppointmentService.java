@@ -21,4 +21,6 @@ public interface AppointmentService {
 	public Appointment findById(Long appointmentId);
 	
 	public List<Appointment> findSessionBy36hours(Date date, Date time);
+
+	public Appointment findDuplicateAptmt(Long id, Long id2);
 }

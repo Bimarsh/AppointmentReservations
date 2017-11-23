@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import app.reservation.model.Appointment;
+import app.reservation.model.Session;
 import app.reservation.repository.AppointmentRepository;
 import app.reservation.service.AppointmentService;
 
@@ -51,6 +52,12 @@ public class AppointmentServiceImp implements AppointmentService {
 	@Override
 	public List<Appointment> findSessionBy36hours(Date date, Date time) {
 		return appoinymentRepository.findSessionBefore36hours(date, time);
+	}
+
+	@Override
+	public Appointment findDuplicateAptmt(Long sessionId, Long personId) {
+		// TODO Auto-generated method stubß
+		return appoinymentRepository.findAppointmentBySessionIdAndPersonId(sessionId, personId);
 	}
 
 }

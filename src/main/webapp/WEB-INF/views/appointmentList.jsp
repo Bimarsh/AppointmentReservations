@@ -16,7 +16,7 @@
 <body>
 	<!-- Main content -->
 	<div class="box-header">
-		<h3 class="box-title">All Sessions:</h3>
+		<h3 class="box-title">All Sessions:  ${duplicate}</h3>
 
 		<sec:authorize url="/addSession">
 

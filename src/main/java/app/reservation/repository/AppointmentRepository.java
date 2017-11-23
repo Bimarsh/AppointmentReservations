@@ -19,4 +19,6 @@ public interface AppointmentRepository extends CrudRepository<Appointment, Long>
 	public List<Appointment> getAppointmentByPersonId(long id);
 	@Query("select s from Appointment s where s.session.startDate = :date and s.session.startTime = :time")
     public List<Appointment> findSessionBefore36hours (@Param("date") @Temporal(TemporalType.DATE) Date date, @Param("time") @Temporal(TemporalType.TIME)Date time);
+
+	public Appointment findAppointmentBySessionIdAndPersonId(Long sessionId, Long personId);
 }
