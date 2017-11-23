@@ -1,7 +1,5 @@
 package app.reservation.controller;
 
-
-
 import javax.servlet.http.HttpSession;
 import javax.validation.constraints.Email;
 
@@ -36,70 +34,71 @@ public class AppointmentController {
 	@Autowired
 	private SessionService sessionService;
 	@Autowired
-	private PersonService personService; 
+	private PersonService personService;
 	@Autowired
 	private AppointmentService appointmentService;
 	@Autowired
 	private EmailService emailService;
 
 	@RequestMapping(value = "/addAppointment/{id}", method = RequestMethod.GET)
-	public String add(@PathVariable long id,HttpSession session ) {
-		Authentication authority=SecurityContextHolder.getContext().getAuthentication();
-		String name= authority.getName();
-		System.out.println("all the names........................"+name);
+	public String add(@PathVariable long id, HttpSession session) {
+		// Get current user
+		Authentication authority = SecurityContextHolder.getContext().getAuthentication();
+		String name = authority.getName();
+		System.out.println("all the names........................" + name);
 		User user = userRepository.findByUsername(name);
-//		User user= (User)session.getAttribute("user");
-		Person person= user.getPerson();
+		Person person = user.getPerson();
+
+		// get Session
 		Session sessionof = sessionService.findOne(id);
-		Appointment appointment= new Appointment();
+
+		// create appointment
+		Appointment appointment = new Appointment();
 		appointment.setPerson(person);
-		//sessionof.addAppointment(appointment);
 		appointment.setSession(sessionof);
 		appointmentService.save(appointment);
-		sessionof.setSeat(sessionof.getSeat()-1);
-		Mail mail = new Mail();
-		sessionService.save(sessionof);
-		System.out.println(mail.getMailFrom());
+		int a = sessionof.getSeat() - 1;
+		sessionof.setSeat(a);
+		sessionService.update(sessionof);
+		emailService.sendMailAfterCreateAppointment(user, appointment);
 		System.out.println("........................................................");
-		
-		
-		return "redirect:/appointment/appointmentList/" ;//+ appointment.getPerson().getId();
+
+		return "redirect:/appointment/appointmentList/";// + appointment.getPerson().getId();
 	}
-	
 
 	@RequestMapping(value = "/appointmentList", method = RequestMethod.GET)
-	public String getAllAppointments( Model model) {
+	public String getAllAppointments(Model model) {
 		model.addAttribute("appointments", appointmentService.getAllAppointment());
 		return "appointmentList";
-		
+
 	}
-	
 
 	@RequestMapping(value = "/appointmentList/{id}", method = RequestMethod.GET)
 	public String get(@PathVariable long id, Model model) {
 		model.addAttribute("appointment", appointmentService.getAppointmentByPersonId(id));
 		return "appointmentList";
-		
-		
-		
+
 	}
+
 	@RequestMapping(value = "/updateAppointment/{id}", method = RequestMethod.GET)
-	public String updateAppointment(@PathVariable Long id, @ModelAttribute("appointment") Appointment appointment, Model modle) {
-	//Appointment updateAppointment = appointmentService
+	public String updateAppointment(@PathVariable Long id, @ModelAttribute("appointment") Appointment appointment,
+			Model modle) {
+		// Appointment updateAppointment = appointmentService
 		modle.addAttribute("mode", "EDIT_APPIONTMNE");
-	//	modle.addAttribute("update", updateAppointment);
+		// modle.addAttribute("update", updateAppointment);
 		return "appointmentList";
 	}
 
-	 
-	  
-	  @RequestMapping(value = "/deletAppointment/{id}", method = RequestMethod.GET)
-	  public String deleteAppointment(long appointmentId) {
-	  appointmentService.delete(appointmentId);
-	  return   "redirect:/appointment/appointmentList";
-	  
-	  }
-	  
+	@RequestMapping(value = "/deletAppointment/{id}", method = RequestMethod.GET)
+	public String deleteAppointment(@PathVariable long id) {
+		Appointment appointment = appointmentService.findById(id);
+		Session session = appointment.getSession();
+		session.setSeat(session.getSeat()+11);
+		sessionService.update(session);
+		appointmentService.delete(id);
 
+		return "redirect:/appointment/appointmentList";
+
+	}
 
 }

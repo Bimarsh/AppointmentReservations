@@ -48,9 +48,4 @@ public class SessionServiceImpl implements SessionService {
 		
 	}
 	
-	public List<Session> findSessionBy36hours(Date date, Date time) {
-		return (List<Session>) sessionRepository.findSessionBefore36hours(date, time);
-	}
-	
-
 }

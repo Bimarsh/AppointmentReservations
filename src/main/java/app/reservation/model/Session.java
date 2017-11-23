@@ -1,16 +1,16 @@
 package app.reservation.model;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -18,6 +18,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.Valid;
 import javax.validation.constraints.Future;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Range;
@@ -26,44 +27,45 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Entity
-public class Session {
+public class Session implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8507125137384362146L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
 	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-mm-dd")
 	@NotNull(message="Required field")
 	private Date startDate;
-	
+
+
 	@Temporal(TemporalType.TIME)
 	@DateTimeFormat(pattern = "HH:mm:ss")
 	private Date startTime;
 	
+	@NotNull
+	@Range(min=10, max=30)
 	private int duration;
-	@Range(min=0, max=25)
-	private Integer seat;
 	
+	@Range(min=1, max=25)
+	private Integer seat;
+	@NotEmpty
 	private String location;
 	
+
 	
 	@Valid
 	@OneToOne
 	@JoinColumn(name = "counselor_id")
 	private Person counselor;
 	
-	@OneToMany(mappedBy="session",fetch=FetchType.EAGER)
-	private List<Appointment> listofAppointments= new ArrayList();
-	
-
-	public List<Appointment> getListofAppointments() {
-		return listofAppointments;
-	}
-
-	public void setListofAppointments(List<Appointment> listofAppointments) {
-		this.listofAppointments = listofAppointments;
-	}
+	@OneToMany(mappedBy="session", cascade=CascadeType.ALL)
+	private List<Appointment> listAppoitment;
 
 	public Session() {
 		
@@ -130,10 +132,6 @@ public class Session {
 
 	public void setDuration(int duration) {
 		this.duration = duration;
-	}
-	public void addAppointment(Appointment appointment)
-	{
-		listofAppointments.add(appointment);
 	}
 
 	@Override

@@ -1,4 +1,3 @@
-
 <%@page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -8,18 +7,22 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
 <link rel="stylesheet"
 	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <link rel="stylesheet"
 	href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 
+
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+
 <link href="resources/AdminLTE.min.css" rel="stylesheet" type="text/css" />
 <link href="resources/blue.css" rel="stylesheet" type="text/css" />
 <link href="resources/bootstrap.min.css" rel="stylesheet"
@@ -47,20 +50,22 @@
 	</section>
 	<c:choose>
 		<c:when test="${mode!='EDIT_SESSION'}">
+
 			<form:form method="post" commandName="session">
+
 				<table align="center" cellpadding="5">
 					<tr>
 					</tr>
 
 					<tr>
 						<td><form:label path="startDate">Start Date
+
 								:</form:label></td>
+
 						<td><form:input placeholder="yyyy-mm-dd" path="startDate"
 								id="datepicker" /> <samp class="glyphicon glyphicon-calendar"></samp>
 
 						</td>
-						<td><form:errors path="startDate" cssStyle="color:red;" /></td>
-					</tr>
 					<tr>
 						<td><form:label path="startTime">Start Time
 							:</form:label></td>
@@ -70,6 +75,7 @@
 					</tr>
 
 					<tr>
+
 						<td><form:label path="duration">Duration
 							:</form:label></td>
 						<td><form:input placeholder="duration" path="duration" /></td>
@@ -77,8 +83,9 @@
 					</tr>
 
 					<tr>
-						<td><form:label path="seat">Seats
+						<td><form:label path="seat">Number of Seats
 							:</form:label></td>
+
 						<td><form:input placeholder="seat" path="seat" /></td>
 						<td><form:errors path="seat" cssStyle="color:red;" /></td>
 					</tr>
@@ -111,85 +118,77 @@
 		</c:when>
 		<c:otherwise>
 
-
 			<c:url value="/session/add" var="updateUrl" />
 			<form:form action="${updateUrl}" method="post" commandName="session">
 				<table align="center" cellpadding="5">
 					<tr>
-
 						<td><form:hidden path="id" value="${update.id}" /></td>
-
 					</tr>
-
 					<tr>
 						<td><form:label path="startDate">Start Date
-				:</form:label></td>
+								:</form:label></td>
 						<td><form:input placeholder="yyyy-mm-dd" path="startDate"
 								id="datepicker" value="${update.startDate}" /> <samp
 								class="glyphicon glyphicon-calendar"></samp></td>
+
 						<td><form:errors path="startDate" cssStyle="color:red;" /></td>
 					</tr>
 
 					<tr>
 						<td><form:label path="startTime">Start Time
-				:</form:label></td>
+								:</form:label></td>
 						<td style="position: relative;"><form:input
 								placeholder="00:00:00" path="startTime"
 								value="${update.startTime}" id="datetimepicker1" /><span
 							id="input" class="glyphicon glyphicon-time"></span></td>
+
 						<td><form:errors path="startTime" cssStyle="color:red;" /></td>
 					</tr>
-
 					<tr>
 						<td><form:label path="duration">Duration
-				:</form:label></td>
+								:</form:label></td>
 						<td><form:input placeholder="duration in min" path="duration"
 								value="${update.duration}" /></td>
 						<td><form:errors path="duration" cssStyle="color:red;" /></td>
 					</tr>
-
 					<tr>
 						<td><form:label path="seat">Number of Seats
-				:</form:label></td>
+								:</form:label></td>
 						<td><form:input placeholder="seat" path="seat"
 								value="${update.seat}" /></td>
 						<td><form:errors path="seat" cssStyle="color:red;" /></td>
 					</tr>
-
 					<tr>
+
 						<td><form:label path="location">Location
-				:</form:label></td>
+								:</form:label></td>
 						<td><form:input placeholder="location" path="location"
 								value="${update.location}" /></td>
 						<td><form:errors path="location" cssStyle="color:red;" /></td>
 					</tr>
 
-
 					<tr>
-						<td><form:label path="counselor.id">Counselor:</form:label></td>
+						<td><form:label path="counselor">Counselor:</form:label></td>
 						<td><form:select path="counselor.id"
 								value="${update.counselor.id}">
 								<form:option value="${update.counselor.id}"
 									label="${update.counselor.firstname}" />
 
-
 								<form:options items="${counselors}" itemLabel="firstname"
 									itemValue="id" />
-
 							</form:select></td>
 						<td><form:errors path="counselor.id" cssStyle="color:red;" /></td>
+
 					</tr>
 					<tr>
 						<td></td>
 						<td colspan="2" align="center"><form:button
 								class="btn btn-primary" name="add">Done</form:button></td>
-
 					</tr>
 				</table>
 			</form:form>
 		</c:otherwise>
 	</c:choose>
-
 
 
 	<!--  -->
@@ -203,6 +202,7 @@
 
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 	<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
 
@@ -214,19 +214,17 @@
 			$("#datepicker").datepicker({
 				dateFormat : 'yy-mm-dd',
 				minDate : new Date()
+
 			});
 			$('#datetimepicker1').datetimepicker({
 				//format: 'hh:mm A' //12 hour format
 				format : 'HH:mm:ss' //24 hour format
 			});
 			$('#datetimepicker1').mousedown(function() {
-
-				if (!$.trim($('#datetimepicker1').val()))
-					$('#datetimepicker1').val('12:00');
+				$('#datetimepicker1').val('12:00');
 			});
 		});
 	</script>
-
 
 </body>
 </html>

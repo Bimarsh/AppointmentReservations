@@ -37,6 +37,12 @@ public class PersonServiceImpl implements PersonService {
 	}
 
 	@Override
+	public List<Person> findPersonByRoleName(UserRoles roleName) {
+
+		 return personRepository.getPersonByUserUserRoles(roleName);
+	}
+
+	@Override
 	public Person findById(Long id) {
 
 		return personRepository.findOne(id);
@@ -51,12 +57,6 @@ public class PersonServiceImpl implements PersonService {
 	public Person findByUserName(String username) {
 
 		return personRepository.findPersonByUserUsername(username);
-	}
-
-	@Override
-	public List<Person> findPersonByRoleName(UserRoles userRole) {
-		return personRepository.getPersonByUserUserRoles(userRole);
-
 	}
 
 }

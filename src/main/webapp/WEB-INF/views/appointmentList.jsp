@@ -43,10 +43,10 @@
 								<th>Id</th>
 								<th>Start Date</th>
 								<th>Start Time</th>
-								<th>Seats Reserved</th>
+								<th>Duration</th>
 								<th>Counselor of the session</th>
 								<th>Edit</th>
-								<th>Delete</th>
+								<th>Action</th>
 							</tr>
 
 						</thead>
@@ -62,12 +62,12 @@
 									<td><c:out value="${appointment.session.counselor.firstname}" /></td> 
 
 									<td><a
-										href="<spring:url value="/session/updateSession/${session.id}" />">
+										href="<spring:url value="/appointment/updateAppointment/${appointment.id}" />">
 											<span class="glyphicon glyphicon-pencil"></span>
 									</a></td>
 									<td><a
-										href="<spring:url value="/session/deletSession/${session.id}" />">
-											<span class="glyphicon glyphicon-trash"></span>
+										href="<spring:url value="/appointment/deletAppointment/${appointment.id}" />">
+											<button class="btn-small btn-danger" onclick="return confirm('Are you sure you want to cancel this appointment??');">Cancel</button>
 									</a></td>
 								</tr>
 							</c:forEach>

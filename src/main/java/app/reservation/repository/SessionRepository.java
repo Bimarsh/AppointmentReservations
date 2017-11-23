@@ -12,6 +12,5 @@ import app.reservation.model.Session;
 
 @Repository
 public interface SessionRepository extends CrudRepository<Session, Long> {
-	@Query("select s from Session s where s.startDate = :date and s.startTime = :time")
-    public List<Session> findSessionBefore36hours (@Param("date")Date date, @Param("time")Date time);
+	
 }

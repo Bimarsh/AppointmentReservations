@@ -3,12 +3,10 @@ package app.reservation.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,9 +39,27 @@ public class SessionController {
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addSession(@ModelAttribute("session") Session session, Model model,
-			HttpSession httpSession) {
-		
+	public String addSession(@ModelAttribute("session") Session session, Model model, HttpSession httpSession) {
+		//
+		// =======
+		// @RequestMapping(value ={"/addSession"}, method = RequestMethod.GET)
+		// public String getSessionForm(@ModelAttribute("session") Session session,Model
+		// model) {
+		// List<Person>counselors=personService.findPersonByRoleName(UserRoles.ROLE_COUNSELOR);
+		// model.addAttribute("counselors",counselors);
+		// return "session";
+		// }
+		//
+		// @RequestMapping(value ="/addsession", method = RequestMethod.POST)
+		// public String addSession(@Valid @ModelAttribute("session") Session
+		// session,BindingResult result,Model model, HttpSession httpSession) {
+		//
+		// if (result.hasErrors() ) {
+		//
+		// return "session";
+		//
+		// }
+		// >>>>>>> master
 		Person person = personService.findById(session.getCounselor().getId());
 		session.setCounselor(person);
 
@@ -73,7 +89,8 @@ public class SessionController {
 
 	}
 
-	@RequestMapping(value = {"", "/", "/sessionList"}, method = RequestMethod.GET)
+	@RequestMapping(value = { "", "/", "/sessionList" }, method = RequestMethod.GET)
+
 	public String getSessionList(Model model) {
 
 		model.addAttribute("sessionList", sessionService.findAll());

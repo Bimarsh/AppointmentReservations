@@ -1,5 +1,6 @@
 package app.reservation.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,13 @@ import app.reservation.model.User;
 
 
 @Entity
-public class Person {
+public class Person implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1295098470712464693L;
+
+
 	public Person() {
 		// TODO Auto-generated constructor stub
 	}
@@ -94,8 +101,5 @@ public class Person {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-
-	
 
 }

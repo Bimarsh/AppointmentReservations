@@ -20,4 +20,5 @@ public interface PersonService {
 	List<Person> findPersonByRoleName(UserRoles userRole);
 
 	Person findByUserName(String username);
+
 }

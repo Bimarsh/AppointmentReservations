@@ -3,12 +3,11 @@
 <head></head>
  
 <body>
-    <p>Dear ${firstName} ${lastName},</p>
+    <p>Dear customer,</p>
     <p>You have a TM checking online on ${day} ${time} 
     with ${counselor}
     at ${location}</b></p>
     <p>Thanks</p>
-    <p>${signature}</p>
 </body>
  
 </html>
