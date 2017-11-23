@@ -1,8 +1,8 @@
 package app.reservation.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,40 +18,36 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import app.reservation.model.Person;
 import app.reservation.model.Session;
+import app.reservation.model.UserRoles;
+import app.reservation.service.PersonService;
 import app.reservation.service.SessionService;
 
 @Controller
 @RequestMapping("/session")
-@SessionAttributes({"update"})
+@SessionAttributes({ "update", "counselors" })
 public class SessionController {
 
 	@Autowired
 	private SessionService sessionService;
 
-	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	@Autowired
+	private PersonService personService;
+
+	@RequestMapping(value = { "/add" }, method = RequestMethod.GET)
 	public String getSessionForm(@ModelAttribute("session") Session session, Model model) {
-
-		List<String> coun = new ArrayList<String>();
-		coun.add("Lwam");
-		coun.add("Yoni");
-		coun.add("Bereket");
-		coun.add("tekle");
-		model.addAttribute("coun", coun);
-
+		List<Person> counselors = personService.findPersonByRoleName(UserRoles.ROLE_COUNSELOR);
+		model.addAttribute("counselors", counselors);
 		return "session";
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addSession(@Valid @ModelAttribute("session") Session session, BindingResult result, Model model) {
+	public String addSession(@ModelAttribute("session") Session session, Model model,
+			HttpSession httpSession) {
+		
+		Person person = personService.findById(session.getCounselor().getId());
+		session.setCounselor(person);
 
-		if (result.hasErrors()) {
-
-			return "session";
-
-		}
-		System.out.println("+++++++++++" + session);
-		Person person = new Person();
-		person.setFirstname("session.firstname");
+		System.out.println("+++++++++++" + person);
 
 		sessionService.save(session);
 
@@ -64,6 +60,8 @@ public class SessionController {
 		Session updateSession = sessionService.findOne(id);
 		modle.addAttribute("mode", "EDIT_SESSION");
 		modle.addAttribute("update", updateSession);
+		List<Person> counselors = personService.findPersonByRoleName(UserRoles.ROLE_COUNSELOR);
+		modle.addAttribute("counselors", counselors);
 		return "session";
 	}
 
@@ -75,11 +73,11 @@ public class SessionController {
 
 	}
 
-	@RequestMapping(value = { "/sessionList", "/", "" }, method = RequestMethod.GET)
+	@RequestMapping(value = {"", "/", "/sessionList"}, method = RequestMethod.GET)
 	public String getSessionList(Model model) {
 
 		model.addAttribute("sessionList", sessionService.findAll());
-		System.out.println("====" + sessionService.findAll());
+
 		return "sessionList";
 	}
 

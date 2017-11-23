@@ -3,6 +3,7 @@ package app.reservation.service;
 import java.util.List;
 
 import app.reservation.model.Person;
+import app.reservation.model.UserRoles;
 
 public interface PersonService {
 
@@ -16,7 +17,7 @@ public interface PersonService {
 
 	void deletePerson(Long id);
 
-	List<Person> findPersonByRoleName(String roleName);
+	List<Person> findPersonByRoleName(UserRoles userRole);
 
 	Person findByUserName(String username);
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import app.reservation.model.Person;
+import app.reservation.model.UserRoles;
 import app.reservation.repository.PersonRepository;
 import app.reservation.service.PersonService;
 
@@ -36,13 +37,6 @@ public class PersonServiceImpl implements PersonService {
 	}
 
 	@Override
-	public List<Person> findPersonByRoleName(String roleName) {
-
-		// return personRepository.findByRoleNmae();
-		return null;
-	}
-
-	@Override
 	public Person findById(Long id) {
 
 		return personRepository.findOne(id);
@@ -50,14 +44,19 @@ public class PersonServiceImpl implements PersonService {
 
 	@Override
 	public List<Person> findAll() {
-		List<Person> persons = (List<Person>) personRepository.findAll();
 		return (List<Person>) personRepository.findAll();
 	}
 
 	@Override
 	public Person findByUserName(String username) {
-		
+
 		return personRepository.findPersonByUserUsername(username);
+	}
+
+	@Override
+	public List<Person> findPersonByRoleName(UserRoles userRole) {
+		return personRepository.getPersonByUserUserRoles(userRole);
+
 	}
 
 }

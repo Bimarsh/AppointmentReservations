@@ -16,7 +16,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.validation.Valid;
 import javax.validation.constraints.Future;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -31,11 +33,12 @@ public class Session {
 	
 	
 	@Temporal(TemporalType.DATE)
-	@Future
+	@DateTimeFormat(pattern = "yyyy-mm-dd")
+	@NotNull(message="Required field")
 	private Date startDate;
 	
-	@Temporal(TemporalType.TIME )
-	@DateTimeFormat(pattern = "HH:mm")
+	@Temporal(TemporalType.TIME)
+	@DateTimeFormat(pattern = "HH:mm:ss")
 	private Date startTime;
 	
 	private int duration;
@@ -45,9 +48,9 @@ public class Session {
 	private String location;
 	
 	
-	@Transient
-	@OneToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL) 
-	@JoinColumn(name="session-ID") 
+	@Valid
+	@OneToOne
+	@JoinColumn(name = "counselor_id")
 	private Person counselor;
 	
 	@OneToMany(mappedBy="session",fetch=FetchType.EAGER)
