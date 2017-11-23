@@ -50,8 +50,13 @@ public class PersonServiceImpl implements PersonService {
 
 	@Override
 	public List<Person> findAll() {
-		List<Person> persons = (List<Person>) personRepository.findAll();
 		return (List<Person>) personRepository.findAll();
+	}
+
+	@Override
+	public Person findByUserName(String username) {
+
+		return personRepository.findPersonByUserUsername(username);
 	}
 
 }

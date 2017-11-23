@@ -17,5 +17,8 @@ public interface PersonService {
 
 	void deletePerson(Long id);
 
-	List<Person> findPersonByRoleName(UserRoles roleName);
+	List<Person> findPersonByRoleName(UserRoles userRole);
+
+	Person findByUserName(String username);
+
 }

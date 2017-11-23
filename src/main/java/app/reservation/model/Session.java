@@ -15,7 +15,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.Valid;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -40,11 +42,10 @@ public class Session implements Serializable {
 	@DateTimeFormat(pattern = "yyyy-mm-dd")
 	@NotNull(message="Required field")
 	private Date startDate;
-	
-	
+
+
 	@Temporal(TemporalType.TIME)
 	@DateTimeFormat(pattern = "HH:mm:ss")
-	@NotNull(message="Required field")
 	private Date startTime;
 	
 	@NotNull
@@ -56,6 +57,9 @@ public class Session implements Serializable {
 	@NotEmpty
 	private String location;
 	
+
+	
+	@Valid
 	@OneToOne
 	@JoinColumn(name = "counselor_id")
 	private Person counselor;

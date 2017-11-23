@@ -41,65 +41,132 @@
 			</div>
 		</div>
 	</section>
+	<c:choose>
+		<c:when test="${mode!='EDIT_PERSON'}">
+			<form:form method="post" commandName="person">
 
-	<form:form method="post" commandName="person">
+				<table align="center" cellpadding="5">
 
-		<table align="center" cellpadding="5">
+					<tr>
+						<td><form:label path="firstname">First Name
+				:</form:label></td>
+						<td><form:input path="firstname" /></td>
+						<td><form:errors path="firstname" cssStyle="color:red;" /></td>
+					</tr>
+					<tr>
+						<td><form:label path="lastname">Last Name
+				:</form:label></td>
+						<td><form:input path="lastname" /></td>
+						<td><form:errors path="lastname" cssStyle="color:red;" /></td>
+					</tr>
+					<tr>
+						<td><form:label path="email">Email
+				:</form:label></td>
+						<td><form:input path="email" /></td>
+						<td><form:errors path="email" cssStyle="color:red;" /></td>
+					</tr>
+					<tr>
+						<td><form:label path="user.username">User Name
+				:</form:label></td>
+						<td><form:input path="user.username" /></td>
+						<td><form:errors path="user.username" cssStyle="color:red;" /></td>
+					</tr>
+					<tr>
+						<td><form:label path="user.password">Password
+				:</form:label></td>
+						<td><form:input path="user.password" /></td>
+						<td><form:errors path="user.password" cssStyle="color:red;" /></td>
+					</tr>
+					<tr>
+						<td><form:label path="user.enabled">Enabled
+				:</form:label></td>
+						<td><form:select path="user.enabled">
+								<form:option value="false" label="false" selected="true" />
+								<form:option value="true" label="true" />
+							</form:select></td>
+						<td><form:errors path="user.enabled" cssStyle="color:red;" /></td>
+					</tr>
+					<tr>
+						<td><form:label path="user.userRoles">User Roles
+				:</form:label></td>
+						<td><form:select path="user.userRoles" items="${roles}"
+								multiple="true" /></td>
+						<td><form:errors path="user.userRoles" cssStyle="color:red;" /></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td colspan="2" align="center"><form:button
+								class="btn btn-primary" name="add">Add</form:button></td>
+					</tr>
+				</table>
 
-			<tr>
-				<td><form:label path="firstname">First Name
-				:</form:label></td>
-				<td><form:input path="firstname" /></td>
-				<td><form:errors path="firstname" cssStyle="color:red;" /></td>
-			</tr>
-			<tr>
-				<td><form:label path="lastname">Last Name
-				:</form:label></td>
-				<td><form:input path="lastname" /></td>
-				<td><form:errors path="lastname" cssStyle="color:red;" /></td>
-			</tr>
-			<tr>
-				<td><form:label path="email">Email
-				:</form:label></td>
-				<td><form:input path="email" /></td>
-				<td><form:errors path="email" cssStyle="color:red;" /></td>
-			</tr>
-			<tr>
-				<td><form:label path="user.username">User Name
-				:</form:label></td>
-				<td><form:input path="user.username" /></td>
-				<td><form:errors path="user.username" cssStyle="color:red;" /></td>
-			</tr>
-			<tr>
-				<td><form:label path="user.password">Password
-				:</form:label></td>
-				<td><form:input path="user.password" /></td>
-				<td><form:errors path="user.password" cssStyle="color:red;" /></td>
-			</tr>
-			<tr>
-				<td><form:label path="user.enabled">Enabled
-				:</form:label></td>
-				<td><form:select path="user.enabled">
-						<form:option value="false" label="false" selected="true" />
-						<form:option value="true" label="true" />
-					</form:select></td>
-				<td><form:errors path="user.enabled" cssStyle="color:red;" /></td>
-			</tr>
-			<tr>
-				<td><form:label path="user.userRoles">User Roles
-				:</form:label></td>
-				<td><form:select path="user.userRoles" items="${roles}"
-						multiple="true" /></td>
-				<td><form:errors path="user.userRoles" cssStyle="color:red;" /></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td colspan="2" align="center"><form:button
-						class="btn btn-primary" name="add">Add</form:button></td>
-			</tr>
-		</table>
+			</form:form>
+		</c:when>
+		<c:otherwise>
+			<c:url value="/persons/update" var="updateUrl" />
+			<form:form action="${updateUrl}" method="post" commandName="person">
 
-	</form:form>
+				<table align="center" cellpadding="5">
+					<tr>
+						<td><form:hidden path="id" value="${personToUpdate.id}" /></td>
+					</tr>
+					<tr>
+						<td><form:label path="firstname">First Name
+														:</form:label></td>
+						<td><form:input path="firstname" value="${personToUpdate.firstname}" /></td>
+						<td><form:errors path="firstname" cssStyle="color:red;" /></td>
+					</tr>
+					<tr>
+						<td><form:label path="lastname">Last Name
+								:</form:label></td>
+						<td><form:input path="lastname" value="${personToUpdate.lastname}" /></td>
+						<td><form:errors path="lastname" cssStyle="color:red;" /></td>
+					</tr>
+					<tr>
+						<td><form:label path="email">Email
+								:</form:label></td>
+						<td><form:input path="email" value="${personToUpdate.email}" /></td>
+						<td><form:errors path="email" cssStyle="color:red;" /></td>
+					</tr>
+					<tr>
+						<td><form:label path="user.username">User Name
+								:</form:label></td>
+						<td><form:input path="user.username" value="${personToUpdate.user.username}" /></td>
+						<td><form:errors path="user.username" cssStyle="color:red;" /></td>
+					</tr>
+					<tr>
+						<td><form:label path="user.password">Password
+								:</form:label></td>
+						<td><form:password path="user.password" value="${personToUpdate.user.password}" /></td>
+						<td><form:errors path="user.password" cssStyle="color:red;" /></td>
+					</tr>
+					<tr>
+						<td><form:label path="user.enabled">Enabled
+								:</form:label></td>
+						<td><form:select path="user.enabled" value="${personToUpdate.user.enabled}">
+								<form:option value="false" label="false" selected="true" />
+								<form:option value="true" label="true" />
+							</form:select></td>
+						<td><form:errors path="user.enabled" cssStyle="color:red;" /></td>
+					</tr>
+					<tr>
+						<td><form:label path="user.userRoles">User Roles
+								:</form:label></td>
+						<td><form:select path="user.userRoles" items="${roles}" value="${personToUpdate.user.userRoles}"
+								multiple="true" /></td>
+						<td><form:errors path="user.userRoles" cssStyle="color:red;" /></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td colspan="2" align="center"><form:button
+								class="btn btn-primary" name="edit">Done</form:button></td>
+					</tr>
+				</table>
+
+			</form:form>
+		</c:otherwise>
+	</c:choose>
+
 
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 	<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>

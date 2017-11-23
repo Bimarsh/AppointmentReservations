@@ -11,5 +11,9 @@ import app.reservation.model.UserRoles;
 @Repository
 public interface PersonRepository extends CrudRepository<Person, Long> {
 
+
+	Person findPersonByUserUsername(String username);
+	
 	List<Person> getPersonByUserUserRoles(UserRoles userRole);
+
 }
