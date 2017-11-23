@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.Valid;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import app.reservation.model.User;
 
@@ -35,13 +38,16 @@ public class Person {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@NotNull
+	@NotEmpty
 	private String firstname;
 	@NotNull
 	private String lastname;
 	
+	@NotEmpty
+	@Email
 	private String email;
 	
+	@Valid
 	@JoinColumn(name = "u_id", referencedColumnName = "id")
 	@OneToOne(cascade=CascadeType.ALL)
 	private User user;

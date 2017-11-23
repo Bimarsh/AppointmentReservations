@@ -3,8 +3,11 @@ package app.reservation.controller;
 
 
 import javax.servlet.http.HttpSession;
+import javax.validation.constraints.Email;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,10 +17,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import app.reservation.model.Appointment;
+import app.reservation.model.Mail;
 import app.reservation.model.Person;
 import app.reservation.model.Session;
 import app.reservation.model.User;
+import app.reservation.repository.UserRepository;
 import app.reservation.service.AppointmentService;
+import app.reservation.service.EmailService;
 import app.reservation.service.PersonService;
 import app.reservation.service.SessionService;
 
@@ -25,18 +31,24 @@ import app.reservation.service.SessionService;
 @RequestMapping("/appointment")
 public class AppointmentController {
 
-	
+	@Autowired
+	private UserRepository userRepository;
 	@Autowired
 	private SessionService sessionService;
 	@Autowired
 	private PersonService personService; 
 	@Autowired
 	private AppointmentService appointmentService;
+	@Autowired
+	private EmailService emailService;
 
 	@RequestMapping(value = "/addAppointment/{id}", method = RequestMethod.GET)
 	public String add(@PathVariable long id,HttpSession session ) {
-		
-		User user= (User)session.getAttribute("user");
+		Authentication authority=SecurityContextHolder.getContext().getAuthentication();
+		String name= authority.getName();
+		System.out.println("all the names........................"+name);
+		User user = userRepository.findByUsername(name);
+//		User user= (User)session.getAttribute("user");
 		Person person= user.getPerson();
 		Session sessionof = sessionService.findOne(id);
 		Appointment appointment= new Appointment();
@@ -44,7 +56,10 @@ public class AppointmentController {
 		//sessionof.addAppointment(appointment);
 		appointment.setSession(sessionof);
 		appointmentService.save(appointment);
-		
+		sessionof.setSeat(sessionof.getSeat()-1);
+		Mail mail = new Mail();
+		sessionService.save(sessionof);
+		System.out.println(mail.getMailFrom());
 		System.out.println("........................................................");
 		
 		
@@ -56,8 +71,6 @@ public class AppointmentController {
 	public String getAllAppointments( Model model) {
 		model.addAttribute("appointments", appointmentService.getAllAppointment());
 		return "appointmentList";
-		
-		
 		
 	}
 	

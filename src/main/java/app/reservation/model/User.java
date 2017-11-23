@@ -13,6 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -25,20 +27,21 @@ public class User {
 	public User(String username, String password) {
 		this.username = username;
 		this.password = password;
-
+		
 	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@NotNull
+	
+	@NotEmpty
 	private String username;
-	@NotNull
+	@NotEmpty
 	private String password;
 	private boolean enabled;
-	@OneToOne(mappedBy = "user")
+	@OneToOne(mappedBy="user")
 	private Person person;
-
+	
 	public Person getPerson() {
 		return person;
 	}
@@ -51,6 +54,8 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private List<UserRoles> userRoles;
 
+	
+
 	public List<UserRoles> getUserRoles() {
 		return userRoles;
 	}
@@ -62,6 +67,12 @@ public class User {
 	public boolean isEnabled() {
 		return enabled;
 	}
+
+	
+
+
+
+	
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;

@@ -64,7 +64,7 @@ public class EmailServiceImpl implements EmailService{
         return content.toString();
     }
     
-    @Scheduled(cron = "0/5 * * * * *")
+//    @Scheduled(cron = "0/5 * * * * *")
     public void sendReminder() {
     	System.out.println("scheduler is running xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
     	Date date = new Date();

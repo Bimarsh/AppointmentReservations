@@ -46,6 +46,7 @@ public class PersonController {
 		return "person";
 	}
 
+
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String add(@Valid @ModelAttribute("person") Person person, BindingResult br, Model model,
 			RedirectAttributes redirectAttributes) {
@@ -56,6 +57,7 @@ public class PersonController {
 			return "person";
 		}
 		redirectAttributes.addFlashAttribute("flashMessage", "Person Added Successfully");
+
 		personService.saveUser(person);
 		return "redirect:/persons";
 	}
