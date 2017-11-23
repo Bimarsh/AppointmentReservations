@@ -111,32 +111,51 @@ public class AppointmentController {
 	public String deleteAppointment(@PathVariable long id) {
 		
 		Appointment appointment = appointmentService.findById(id);
-		Authentication authority = SecurityContextHolder.getContext().getAuthentication();
-		String name = authority.getName();
-		User user = userRepository.findByUsername(name);
 		Date date = new Date();
+		date.setDate(date.getDate()+2);
 		Date time = appointment.getSession().getStartDate();
-		boolean roleAdmin = false;;
-		if (user != null) {
-			roleAdmin = true;
-		} else {
-			List<UserRoles> userRoles = user.getUserRoles();
-			for (UserRoles u : userRoles) {
-				if (u.equals(UserRoles.ROLE_ADMIN)) roleAdmin = true;
-			}
-		}
-		
-		System.out.println(time);
-		System.out.println(date.compareTo(appointment.getSession().getStartDate()) + " This is the within 24 hours");
-		if (date.compareTo(appointment.getSession().getStartDate()) <= 2 && !roleAdmin) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		boolean hasRoleAdmin = authentication.getAuthorities().stream()
+		          .anyMatch(r -> r.getAuthority().equals(UserRoles.ROLE_ADMIN) || r.getAuthority().equals("ROLE_ADMIN"));
+		if (date.getDate() - time.getDate() >= -2 && !hasRoleAdmin) {
 			return "redirect:/appointment/appointmentList";
 		}
 		Session session = appointment.getSession();
 		session.setSeat(session.getSeat()+1);
 		sessionService.update(session);
+		User user = appointment.getPerson().getUser();
 		appointmentService.delete(id);
 		emailService.sendMailAfterCreateAppointment(user, appointment, "canceled");
 		return "redirect:/appointment/appointmentList";
+		
+//		Appointment appointment = appointmentService.findById(id);
+//		Authentication authority = SecurityContextHolder.getContext().getAuthentication();
+//		String name = authority.getName();
+//		User user = userRepository.findByUsername(name);
+//		Date date = new Date();
+//		Date time = appointment.getSession().getStartDate();
+//		boolean roleAdmin = false;;
+//		if (user != null) {
+//			roleAdmin = true;
+//		} else {
+//			List<UserRoles> userRoles = user.getUserRoles();
+//			for (UserRoles u : userRoles) {
+//				if (u.equals(UserRoles.ROLE_ADMIN)) roleAdmin = true;
+//			}
+//		}
+//		
+//		System.out.println(time);
+//		System.out.println(date.compareTo(appointment.getSession().getStartDate()) + " This is the within 24 hours");
+//		if (date.compareTo(appointment.getSession().getStartDate()) <= 2 && !roleAdmin) {
+//			return "redirect:/appointment/appointmentList";
+//		}
+//		Session session = appointment.getSession();
+//		session.setSeat(session.getSeat()+1);
+//		sessionService.update(session);
+//		appointmentService.delete(id);
+//		emailService.sendMailAfterCreateAppointment(user, appointment, "canceled");
+//		return "redirect:/appointment/appointmentList";
+		
 
 	}
 
