@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import app.reservation.model.Person;
-import app.reservation.model.Session;
 import app.reservation.model.UserRoles;
 import app.reservation.service.PersonService;
 
@@ -47,15 +47,15 @@ public class PersonController {
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String add(@Valid @ModelAttribute("person") Person person, BindingResult br, Model model) {
-		
-		Person p = null; 
+	public String add(@Valid @ModelAttribute("person") Person person, BindingResult br, Model model,
+			RedirectAttributes redirectAttributes) {
+
+		Person p = null;
 		p = personService.findByUserName(person.getUser().getUsername());
-		if(p.getUser().getUsername() != null) {
+		if (p != null) {
 			return "person";
 		}
-		
-		
+		redirectAttributes.addFlashAttribute("flashMessage", "Person Added Successfully");
 		personService.saveUser(person);
 		return "redirect:/persons";
 	}
@@ -76,8 +76,11 @@ public class PersonController {
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String updatePerson(@ModelAttribute("person") Person person, BindingResult br, Model model) {
+	public String updatePerson(@ModelAttribute("person") Person person, BindingResult br, Model model,
+			RedirectAttributes redirectAttributes) {
 		personService.saveUser(person);
+
+		redirectAttributes.addFlashAttribute("flashMessage", "Person Modified Successfully");
 		return "redirect:/persons";
 	}
 

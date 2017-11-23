@@ -14,7 +14,14 @@
 </head>
 
 <body>
+	<c:if test="${not empty flashMessage}">
+		<div>
+			<strong>${flashMessage}</strong>
+		</div>
+	</c:if>
 	<div class="box-header">
+
+
 		<h3 class="box-title">All persons:</h3>
 
 		<sec:authorize url="/addperson">
@@ -37,7 +44,6 @@
 						aria-describedby="example2_info">
 						<thead>
 							<tr role="row">
-								<th>Id</th>
 								<th>First Name</th>
 								<th>Last Name</th>
 								<th>Email</th>
@@ -49,10 +55,7 @@
 						<tbody>
 							<c:forEach items="${personsList}" var="person">
 								<tr>
-									<td><c:out value="${person.id} " /></td>
-
 									<td><c:out value="${person.firstname}" /></td>
-
 									<td><c:out value="${person.lastname}" /></td>
 									<td><c:out value="${person.email}" /></td>
 									<td><c:out value="${person.user.username}" /></td>
@@ -61,7 +64,8 @@
 											<c:out value="${role }, " />
 										</c:forEach></td>
 
-									<td><a href="<spring:url value="/persons/update/${person.id}" />">
+									<td><a
+										href="<spring:url value="/persons/update/${person.id}" />">
 											<span class="glyphicon glyphicon-pencil"></span>
 									</a></td>
 								</tr>
